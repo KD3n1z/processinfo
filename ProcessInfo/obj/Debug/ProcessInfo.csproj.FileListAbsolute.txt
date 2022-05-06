@@ -1,0 +1,16 @@
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\bin\Debug\ProcessInfo.exe.config
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\bin\Debug\ProcessInfo.exe
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\bin\Debug\ProcessInfo.pdb
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.csproj.AssemblyReference.cache
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.csproj.SuggestedBindingRedirects.cache
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.Properties.Resources.resources
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.csproj.GenerateResource.cache
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.csproj.CoreCompileInputs.cache
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.exe
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.pdb
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.Pref.resources
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.MainF.resources
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.ProcessModulesView.resources
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.ProcessThreadsView.resources
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.TBox.resources
+C:\Users\shu\source\repos\ProcessInfo\ProcessInfo\obj\Debug\ProcessInfo.BlockForm.resources
