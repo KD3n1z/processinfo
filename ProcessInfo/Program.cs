@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace ProcessInfo
 {
@@ -27,11 +29,13 @@ namespace ProcessInfo
         public static Color bg = Color.FromArgb(28, 28, 28);
         public static Color dbg = Color.FromArgb(16, 16, 16);
         public static Color fg = Color.White;
+        public static int radius = 5;
 
-        public static int build = 4;
+        public static int build = 5;
         public static MainF mainForm;
 
-        public static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ProcessInfo3");
+        public static string generalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "kd3n1z-general");
+        public static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ProcessInfo");
         public static string settings = Path.Combine(path, "settings");
 
         public static int latest = -1;
@@ -62,6 +66,10 @@ namespace ProcessInfo
 
             hidden = args.Contains("-hidden");
 
+            if (!Directory.Exists(generalPath))
+            {
+                Directory.CreateDirectory(generalPath);
+            }
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -121,22 +129,29 @@ namespace ProcessInfo
         public static void Update()
         {
             updating = true;
-            string updater = Path.Combine(path, "updater.exe");
+            string updater = Path.Combine(generalPath, "updater.exe");
 
             if (!File.Exists(updater))
             {
-                new WebClient().DownloadFile("http://kd3n1z.com/apps/pi/updater.exe", updater);
+                new WebClient().DownloadFile("https://github.com/KD3n1z/updater/releases/download/main/updater.exe", updater);
             }
 
-            Process.Start(updater, Process.GetCurrentProcess().MainModule.FileName);
+            if(latestRelease == null)
+            {
+                latestRelease = ParseJsonFromUrl("https://api.github.com/repos/KD3n1z/processinfo/releases/latest");
+            }
+
+            Process.Start(updater, "\"path=" + Process.GetCurrentProcess().MainModule.FileName + "\" \"url=" + latestRelease.XPathSelectElement("//assets").FirstNode.XPathSelectElement("//browser_download_url").Value + "\" \"app=ProcessInfo\"");
             Application.Exit();
         }
 
+        static XElement latestRelease = null;
         public static int GetLatestVersion()
         {
             try
             {
-                return int.Parse(new WebClient().DownloadString("http://kd3n1z.com/apps.php?app=pi&action=latest"));
+                latestRelease = ParseJsonFromUrl("https://api.github.com/repos/KD3n1z/processinfo/releases/latest");
+                return int.Parse(latestRelease.XPathSelectElement("/name").Value.ToLower().Replace("build ", ""));
             }
             catch
             {
@@ -149,10 +164,19 @@ namespace ProcessInfo
             File.WriteAllText(Path.Combine(settings, "bg.txt"), bg.ToArgb().ToString());
             File.WriteAllText(Path.Combine(settings, "dbg.txt"), dbg.ToArgb().ToString());
             File.WriteAllText(Path.Combine(settings, "fg.txt"), fg.ToArgb().ToString());
+            File.WriteAllText(Path.Combine(settings, "br.txt"), radius.ToString());
             File.WriteAllText(Path.Combine(settings, "ub.txt"), ((int)ub).ToString());
             File.WriteAllText(Path.Combine(settings, "kk.txt"), ((int)KillKey).ToString());
             File.WriteAllText(Path.Combine(settings, "uk.txt"), ((int)UpdateKey).ToString());
             File.WriteAllText(Path.Combine(settings, "sk.txt"), ((int)ShowKey).ToString());
+        }
+
+        static XElement ParseJsonFromUrl(string url)
+        {
+            WebClient wc = new WebClient();
+            wc.Headers.Add("User-Agent", "request");
+            var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(wc.DownloadString(url)), new System.Xml.XmlDictionaryReaderQuotas());
+            return XElement.Load(jsonReader);
         }
 
         static void Load()
@@ -168,6 +192,10 @@ namespace ProcessInfo
             try
             {
                 fg = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "fg.txt"))));
+            } catch { }
+            try
+            {
+                radius = int.Parse(File.ReadAllText(Path.Combine(settings, "br.txt")));
             } catch { }
             try
             {

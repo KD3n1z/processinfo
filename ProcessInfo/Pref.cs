@@ -1,15 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProcessInfo
@@ -18,7 +15,7 @@ namespace ProcessInfo
     {
         RegistryKey alReg;
 
-        string themes = Path.Combine(Program.path, "themes");
+        string themes = Path.Combine(Program.generalPath, "themes");
         public Pref()
         {
             InitializeComponent();
@@ -47,14 +44,13 @@ namespace ProcessInfo
                 Directory.CreateDirectory(themes);
                 try
                 {
-                    WebClient wc = new WebClient();
-                    foreach (string theme in wc.DownloadString("http://kd3n1z.com/apps/pi/tlist.php").Split(';'))
-                    {
-                        if (!string.IsNullOrEmpty(theme)) //  && theme.StartsWith("bi-")
-                        {
-                            wc.DownloadFile("http://kd3n1z.com/apps/pi/themes/" + theme, Path.Combine(themes, theme.StartsWith("bi-") ? theme.Remove(0, 3) : theme));
-                        }
-                    }
+                    string dPath = Path.Combine(themes, "themes.zip");
+
+                    new WebClient().DownloadFile("https://github.com/KD3n1z/kd3n1z-com/raw/main/themes.zip", dPath);
+
+                    ZipFile.ExtractToDirectory(dPath, themes);
+
+                    File.Delete(dPath);
                 }
                 catch { }
                 File.WriteAllText(themeFile, "default");
@@ -98,7 +94,7 @@ namespace ProcessInfo
         {
             if (Program.latest > Program.build)
             {
-                button4.Text = "Update (server=b" + Program.latest + "; local=b" + Program.build + ")";
+                button4.Text = "Update (github=b" + Program.latest + "; local=b" + Program.build + ")";
             }
         }
 
@@ -187,7 +183,7 @@ namespace ProcessInfo
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://kd3n1z.com/");
+            Process.Start("http://kd3n1z.com/index.php?app=ProcessInfo");
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -228,10 +224,9 @@ namespace ProcessInfo
 
             if (Program.latest <= Program.build)
             {
-                button4.Text = "Updates not found (server=b" + Program.latest + "; local=b" + Program.build + ")";
+                button4.Text = "Updates not found (github=b" + Program.latest + "; local=b" + Program.build + ")";
             }
-
-            if (Program.latest > Program.build)
+            else if (Program.latest > Program.build)
             {
                 MarkUpdateBtn();
                 Program.AskForUpdate();
@@ -294,7 +289,8 @@ namespace ProcessInfo
             button1.BackColor = Program.fg = Color.FromArgb(int.Parse(vals[1]));
             button2.BackColor = Program.bg =  Color.FromArgb(int.Parse(vals[2]));
             button3.BackColor = Program.dbg = Color.FromArgb(int.Parse(vals[3]));
-            
+            trackBar1.Value = Program.radius;
+            trackBar1_Scroll(this, null);
 
 
             Program.mainForm.LoadTheme();
@@ -329,6 +325,15 @@ namespace ProcessInfo
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            label6.Text = "radius: " + trackBar1.Value + "px";
+
+            Program.radius = trackBar1.Value;
+
+            Program.mainForm.LoadTheme();
         }
     }
 }
