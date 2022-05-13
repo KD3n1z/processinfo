@@ -53,7 +53,7 @@ namespace ProcessInfo
                     File.Delete(dPath);
                 }
                 catch { }
-                File.WriteAllText(themeFile, "default");
+                File.WriteAllText(themeFile, "venus");
             }
 
             foreach(string f in Directory.GetFiles(themes).OrderByDescending(t => Path.GetFileNameWithoutExtension(t).StartsWith("def") || Path.GetFileNameWithoutExtension(t).StartsWith("light")))

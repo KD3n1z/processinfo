@@ -22,16 +22,17 @@ namespace ProcessInfo
     }
     internal static class Program
     {
+        public static int build = 6;
+
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
         public static Keys ShowKey = Keys.F7;
         public static UpdateBehaviour ub = UpdateBehaviour.Ask;
-        public static Color bg = Color.FromArgb(28, 28, 28);
-        public static Color dbg = Color.FromArgb(16, 16, 16);
+        public static Color bg = Color.FromArgb(47, 47, 93);
+        public static Color dbg = Color.FromArgb(39, 39, 78);
         public static Color fg = Color.White;
         public static int radius = 5;
 
-        public static int build = 5;
         public static MainF mainForm;
 
         public static string generalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "kd3n1z-general");
