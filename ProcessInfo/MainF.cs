@@ -72,6 +72,10 @@ namespace ProcessInfo
         [DllImport("user32.dll")]
         static extern int GetAsyncKeyState(Int32 i);
         #endregion
+        public MainF()
+        {
+            InitializeComponent();
+        }
 
         public string KeyCodeToUnicode(Keys key)
         {
@@ -131,12 +135,6 @@ namespace ProcessInfo
 
                 CloseHandle(pOpenThread);
             }
-        }
-
-
-        public MainF()
-        {
-            InitializeComponent();
         }
 
         bool mouseDown;
@@ -269,8 +267,9 @@ namespace ProcessInfo
 
         bool canUpdate = true;
 
-        void UpdateList() => UpdateList("");
 
+        bool firstUpdate = true;
+        void UpdateList() => UpdateList("");
         void UpdateList(string filter)
         {
             if (canUpdate)
@@ -309,10 +308,16 @@ namespace ProcessInfo
                             listBox1.Items.Add(i);
                         }));
                     }
+
+                    // cache icons
+                    if (firstUpdate)
+                    {
+                        i.CacheIcon();
+                    }
                 }
                 canUpdate = true;
             }
-
+            firstUpdate = false;
         }
 
         string sText = "";
@@ -533,10 +538,73 @@ namespace ProcessInfo
         {
             run = false;
         }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index >= listBox1.Items.Count || e.Index <= -1)
+            {
+                return;
+            }
+
+            Info item = (Info)listBox1.Items[e.Index];
+
+            if (item == null)
+            {
+                return;
+            }
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.Blue), e.Bounds);
+            }
+            else
+            {
+                e.Graphics.FillRectangle(new SolidBrush(listBox1.BackColor), e.Bounds);
+            }
+
+            string text = item.ToString();
+            SizeF stringSize = e.Graphics.MeasureString(text, Font);
+
+            e.Graphics.DrawIcon(item.Icon, new Rectangle(1 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2));
+
+            e.Graphics.DrawString(
+                    text,
+                    listBox1.Font,
+                    new SolidBrush(listBox1.ForeColor),
+                    new PointF(e.Bounds.Height, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
+                );
+        }
     }
 
     public class Info
     {
+        public Process p;
+
+        Icon icon = null;
+        public Icon Icon
+        {
+            get
+            {
+                if(icon == null)
+                {
+                    CacheIcon();
+                }
+                return icon;
+            }
+        }
+
+        public void CacheIcon()
+        {
+            try
+            {
+                icon = Icon.ExtractAssociatedIcon(FileName);
+            }
+            catch
+            {
+                icon = global::ProcessInfo.Properties.Resources.piico;
+            }
+        }
+
         public string FileName
         {
             get
@@ -551,8 +619,6 @@ namespace ProcessInfo
                 }
             }
         }
-
-        public Process p;
 
         public void Refresh()
         {
