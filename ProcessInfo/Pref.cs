@@ -65,9 +65,10 @@ namespace ProcessInfo
             }
             comboBox1.Text = File.ReadAllText(themeFile);
 
-            button1.BackColor = Program.fg;
-            button2.BackColor = Program.bg;
-            button3.BackColor = Program.dbg;
+            textCB.BackColor = Program.foreColor;
+            backCB.BackColor = Program.backColor;
+            dbackCB.BackColor = Program.darkBackColor;
+            selCB.BackColor = Program.selColor;
             label1.Text += Program.build;
 
             switch (Program.ub)
@@ -88,6 +89,8 @@ namespace ProcessInfo
             button8.Text = Program.ShowKey.ToString();
 
             MarkUpdateBtn();
+
+            loaded = true;
         }
 
         void MarkUpdateBtn()
@@ -105,44 +108,34 @@ namespace ProcessInfo
             c.ForeColor = c.BackColor.R + c.BackColor.G + c.BackColor.B > 382 ? Color.Black : Color.White;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void changeColor(object sender, EventArgs e)
         {
-            colorDialog1.Color = button1.BackColor;
+            Button b = (Button)sender;
+
+            colorDialog1.Color = b.BackColor;
 
             if(colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                button1.BackColor = colorDialog1.Color;
+                b.BackColor = colorDialog1.Color;
             }
 
-            Program.fg = button1.BackColor;
-
-            Program.mainForm.LoadTheme();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            colorDialog1.Color = button2.BackColor;
-
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            switch (b.Tag.ToString())
             {
-                button2.BackColor = colorDialog1.Color;
+                case "text":
+                    Program.foreColor = b.BackColor;
+                    break;
+                case "bg":
+                    Program.backColor = b.BackColor;
+                    break;
+                case "dbg":
+                    Program.darkBackColor = b.BackColor;
+                    break;
+                case "sel":
+                    Program.selColor = b.BackColor;
+                    break;
+                default:
+                    break;
             }
-
-            Program.bg = button2.BackColor;
-
-            Program.mainForm.LoadTheme();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            colorDialog1.Color = button3.BackColor;
-
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                button3.BackColor = colorDialog1.Color;
-            }
-
-            Program.dbg = button3.BackColor;
 
             Program.mainForm.LoadTheme();
         }
@@ -186,26 +179,6 @@ namespace ProcessInfo
             Process.Start("http://kd3n1z.com/index.php?app=ProcessInfo");
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button5_KeyDown(object sender, KeyEventArgs e)
         {
             Program.UpdateKey = e.KeyCode;
@@ -238,7 +211,7 @@ namespace ProcessInfo
             Process.Start("explorer.exe", "\"" + Program.path + "\"");
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void saveThemeButton_Click(object sender, EventArgs e)
         {
             if(File.Exists(Path.Combine(themes, comboBox1.Text + ".pit")))
             {
@@ -272,23 +245,36 @@ namespace ProcessInfo
         {
             File.WriteAllText(Path.Combine(themes, comboBox1.Text + ".pit"),
                 "custom\n"
-                + button1.BackColor.ToArgb().ToString() + "\n"
-                + button2.BackColor.ToArgb().ToString() + "\n"
-                + button3.BackColor.ToArgb().ToString() + "\n"
+                + textCB.BackColor.ToArgb().ToString() + "\n"
+                + backCB.BackColor.ToArgb().ToString() + "\n"
+                + dbackCB.BackColor.ToArgb().ToString() + "\n"
+                + selCB.BackColor.ToArgb().ToString() + "\n"
                 );
         }
 
+
+        bool loaded = false;
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadPIT(comboBox1.Text);
+            if (loaded)
+            {
+                LoadPIT(comboBox1.Text);
+            }
         }
 
         void LoadPIT(string pitName)
         {
             string[] vals = File.ReadAllText(Path.Combine(themes, pitName + ".pit")).Split('\n');
-            button1.BackColor = Program.fg = Color.FromArgb(int.Parse(vals[1]));
-            button2.BackColor = Program.bg =  Color.FromArgb(int.Parse(vals[2]));
-            button3.BackColor = Program.dbg = Color.FromArgb(int.Parse(vals[3]));
+            textCB.BackColor = Program.foreColor = Color.FromArgb(int.Parse(vals[1]));
+            backCB.BackColor = Program.backColor =  Color.FromArgb(int.Parse(vals[2]));
+            dbackCB.BackColor = Program.darkBackColor = Color.FromArgb(int.Parse(vals[3]));
+
+            try
+            {
+                selCB.BackColor = Program.selColor = Color.FromArgb(int.Parse(vals[4]));
+            }
+            catch { }
+
             trackBar1.Value = Program.radius;
             trackBar1_Scroll(this, null);
 

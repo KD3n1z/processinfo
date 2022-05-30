@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.selCB = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dbackCB = new System.Windows.Forms.Button();
+            this.backCB = new System.Windows.Forms.Button();
+            this.textCB = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -63,97 +64,117 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.selCB);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.dbackCB);
+            this.groupBox1.Controls.Add(this.backCB);
+            this.groupBox1.Controls.Add(this.textCB);
             this.groupBox1.Controls.Add(this.trackBar1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Location = new System.Drawing.Point(12, 87);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(324, 261);
+            this.groupBox1.Size = new System.Drawing.Size(324, 226);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Theme";
             this.groupBox1.BackColorChanged += new System.EventHandler(this.changeFG);
             // 
+            // selCB
+            // 
+            this.selCB.BackColor = System.Drawing.Color.Blue;
+            this.selCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.selCB.ForeColor = System.Drawing.Color.White;
+            this.selCB.Location = new System.Drawing.Point(6, 62);
+            this.selCB.Name = "selCB";
+            this.selCB.Size = new System.Drawing.Size(147, 37);
+            this.selCB.TabIndex = 7;
+            this.selCB.Tag = "sel";
+            this.selCB.Text = "Selection";
+            this.selCB.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.selCB.UseVisualStyleBackColor = false;
+            this.selCB.BackColorChanged += new System.EventHandler(this.changeFG);
+            this.selCB.Click += new System.EventHandler(this.changeColor);
+            // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(6, 231);
+            this.button7.Location = new System.Drawing.Point(6, 194);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(312, 24);
             this.button7.TabIndex = 4;
             this.button7.Text = "Save";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.Click += new System.EventHandler(this.saveThemeButton_Click);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 204);
+            this.comboBox1.Location = new System.Drawing.Point(6, 167);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(312, 21);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // button3
+            // dbackCB
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(6, 105);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(312, 37);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Dark Background";
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.BackColorChanged += new System.EventHandler(this.changeFG);
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.dbackCB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.dbackCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.dbackCB.ForeColor = System.Drawing.Color.White;
+            this.dbackCB.Location = new System.Drawing.Point(159, 62);
+            this.dbackCB.Name = "dbackCB";
+            this.dbackCB.Size = new System.Drawing.Size(159, 37);
+            this.dbackCB.TabIndex = 2;
+            this.dbackCB.Tag = "dbg";
+            this.dbackCB.Text = "Dark Background";
+            this.dbackCB.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.dbackCB.UseVisualStyleBackColor = false;
+            this.dbackCB.BackColorChanged += new System.EventHandler(this.changeFG);
+            this.dbackCB.Click += new System.EventHandler(this.changeColor);
             // 
-            // button2
+            // backCB
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(6, 62);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(312, 37);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Background";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.BackColorChanged += new System.EventHandler(this.changeFG);
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.backCB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.backCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.backCB.ForeColor = System.Drawing.Color.White;
+            this.backCB.Location = new System.Drawing.Point(159, 19);
+            this.backCB.Name = "backCB";
+            this.backCB.Size = new System.Drawing.Size(159, 37);
+            this.backCB.TabIndex = 1;
+            this.backCB.Tag = "bg";
+            this.backCB.Text = "Background";
+            this.backCB.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.backCB.UseVisualStyleBackColor = false;
+            this.backCB.BackColorChanged += new System.EventHandler(this.changeFG);
+            this.backCB.Click += new System.EventHandler(this.changeColor);
             // 
-            // button1
+            // textCB
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(6, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(312, 37);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Text";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.BackColorChanged += new System.EventHandler(this.changeFG);
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.textCB.BackColor = System.Drawing.Color.White;
+            this.textCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.textCB.ForeColor = System.Drawing.Color.Black;
+            this.textCB.Location = new System.Drawing.Point(6, 19);
+            this.textCB.Name = "textCB";
+            this.textCB.Size = new System.Drawing.Size(147, 37);
+            this.textCB.TabIndex = 0;
+            this.textCB.Tag = "text";
+            this.textCB.Text = "Text";
+            this.textCB.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.textCB.UseVisualStyleBackColor = false;
+            this.textCB.BackColorChanged += new System.EventHandler(this.changeFG);
+            this.textCB.Click += new System.EventHandler(this.changeColor);
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(10, 168);
+            this.trackBar1.Location = new System.Drawing.Point(6, 133);
             this.trackBar1.Maximum = 15;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(308, 45);
+            this.trackBar1.Size = new System.Drawing.Size(312, 45);
             this.trackBar1.TabIndex = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(6, 145);
+            this.label6.Location = new System.Drawing.Point(6, 107);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(312, 23);
             this.label6.TabIndex = 6;
@@ -174,7 +195,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(122, 565);
+            this.linkLabel1.Location = new System.Drawing.Point(119, 513);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(96, 13);
             this.linkLabel1.TabIndex = 3;
@@ -189,7 +210,7 @@
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Location = new System.Drawing.Point(12, 364);
+            this.groupBox2.Location = new System.Drawing.Point(12, 319);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(324, 84);
             this.groupBox2.TabIndex = 3;
@@ -205,7 +226,6 @@
             this.radioButton3.TabIndex = 3;
             this.radioButton3.Text = "ask me";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -216,7 +236,6 @@
             this.radioButton2.TabIndex = 2;
             this.radioButton2.Text = "never update";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -227,7 +246,6 @@
             this.radioButton1.TabIndex = 1;
             this.radioButton1.Text = "always update";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // button4
             // 
@@ -255,7 +273,7 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.button5);
-            this.groupBox3.Location = new System.Drawing.Point(12, 454);
+            this.groupBox3.Location = new System.Drawing.Point(12, 409);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(324, 100);
             this.groupBox3.TabIndex = 4;
@@ -356,7 +374,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 589);
+            this.ClientSize = new System.Drawing.Size(348, 535);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pictureBox1);
@@ -390,10 +408,10 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button textCB;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button backCB;
+        private System.Windows.Forms.Button dbackCB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -415,5 +433,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button selCB;
     }
 }

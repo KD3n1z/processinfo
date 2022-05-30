@@ -22,16 +22,17 @@ namespace ProcessInfo
     }
     internal static class Program
     {
-        public static int build = 6;
+        public static int build = 7;
 
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
         public static Keys ShowKey = Keys.F7;
         public static UpdateBehaviour ub = UpdateBehaviour.Ask;
-        public static Color bg = Color.FromArgb(47, 47, 93);
-        public static Color dbg = Color.FromArgb(39, 39, 78);
-        public static Color fg = Color.White;
-        public static int radius = 5;
+        public static Color backColor = Color.FromArgb(47, 47, 93);
+        public static Color darkBackColor = Color.FromArgb(39, 39, 78);
+        public static Color foreColor = Color.White;
+        public static Color selColor = Color.Blue;
+        public static int radius = 9;
 
         public static MainF mainForm;
 
@@ -162,9 +163,11 @@ namespace ProcessInfo
 
         public static void Save()
         {
-            File.WriteAllText(Path.Combine(settings, "bg.txt"), bg.ToArgb().ToString());
-            File.WriteAllText(Path.Combine(settings, "dbg.txt"), dbg.ToArgb().ToString());
-            File.WriteAllText(Path.Combine(settings, "fg.txt"), fg.ToArgb().ToString());
+            File.WriteAllText(Path.Combine(settings, "bg.txt"), backColor.ToArgb().ToString());
+            File.WriteAllText(Path.Combine(settings, "dbg.txt"), darkBackColor.ToArgb().ToString());
+            File.WriteAllText(Path.Combine(settings, "fg.txt"), foreColor.ToArgb().ToString());
+            File.WriteAllText(Path.Combine(settings, "fg.txt"), foreColor.ToArgb().ToString());
+            File.WriteAllText(Path.Combine(settings, "sc.txt"), selColor.ToArgb().ToString());
             File.WriteAllText(Path.Combine(settings, "br.txt"), radius.ToString());
             File.WriteAllText(Path.Combine(settings, "ub.txt"), ((int)ub).ToString());
             File.WriteAllText(Path.Combine(settings, "kk.txt"), ((int)KillKey).ToString());
@@ -184,15 +187,19 @@ namespace ProcessInfo
         {
             try
             {
-                bg = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "bg.txt"))));
+                backColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "bg.txt"))));
             } catch { }
             try
             {
-                dbg = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "dbg.txt"))));
+                darkBackColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "dbg.txt"))));
             } catch { }
             try
             {
-                fg = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "fg.txt"))));
+                foreColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "fg.txt"))));
+            } catch { }
+            try
+            {
+                selColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "sc.txt"))));
             } catch { }
             try
             {

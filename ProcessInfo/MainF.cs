@@ -144,8 +144,9 @@ namespace ProcessInfo
         {
             if (e.Button == MouseButtons.Left)
             {
+                Point senderLoc = ((Control)sender).Location;
                 mouseDown = true;
-                mouseOffsetForm = e.Location;
+                mouseOffsetForm = new Point(e.Location.X + senderLoc.X, e.Location.Y + senderLoc.Y);
             }
         }
 
@@ -243,14 +244,14 @@ namespace ProcessInfo
         {
             foreach (Control c in Controls)
             {
-                c.ForeColor = Program.fg;
+                c.ForeColor = Program.foreColor;
                 if ((string)c.Tag == "dark")
                 {
-                    c.BackColor = Program.dbg;
+                    c.BackColor = Program.darkBackColor;
                 }
                 else
                 {
-                    c.BackColor = Program.bg;
+                    c.BackColor = Program.backColor;
                 }
             }
 
@@ -413,13 +414,6 @@ namespace ProcessInfo
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            new Pref().ShowDialog();
-
-           // LoadTheme();
-        }
-
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
 
@@ -555,7 +549,7 @@ namespace ProcessInfo
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Blue), e.Bounds);
+                e.Graphics.FillRectangle(new SolidBrush(Program.selColor), e.Bounds);
             }
             else
             {
@@ -565,7 +559,7 @@ namespace ProcessInfo
             string text = item.ToString();
             SizeF stringSize = e.Graphics.MeasureString(text, Font);
 
-            e.Graphics.DrawIcon(item.Icon, new Rectangle(1 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2));
+            e.Graphics.DrawIcon(item.Icon, new Rectangle(2 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2));
 
             e.Graphics.DrawString(
                     text,
@@ -573,6 +567,11 @@ namespace ProcessInfo
                     new SolidBrush(listBox1.ForeColor),
                     new PointF(e.Bounds.Height, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
                 );
+        }
+
+        private void openPrefs(object sender, EventArgs e)
+        {
+            new Pref().ShowDialog();
         }
     }
 
@@ -597,11 +596,11 @@ namespace ProcessInfo
         {
             try
             {
-                icon = Icon.ExtractAssociatedIcon(FileName);
+                icon = new Icon(Icon.ExtractAssociatedIcon(FileName), 16, 16);
             }
             catch
             {
-                icon = global::ProcessInfo.Properties.Resources.piico;
+                icon = global::ProcessInfo.Properties.Resources.error;
             }
         }
 

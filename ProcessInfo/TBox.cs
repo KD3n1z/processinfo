@@ -16,8 +16,8 @@ namespace ProcessInfo
         public TBox()
         {
             InitializeComponent();
-            textBox1.BackColor = Program.bg;
-            textBox1.ForeColor = Program.fg;
+            textBox1.BackColor = Program.backColor;
+            textBox1.ForeColor = Program.foreColor;
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
