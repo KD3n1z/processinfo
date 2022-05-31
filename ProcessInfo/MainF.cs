@@ -71,7 +71,11 @@ namespace ProcessInfo
 
         [DllImport("user32.dll")]
         static extern int GetAsyncKeyState(Int32 i);
+
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
         #endregion
+
         public MainF()
         {
             InitializeComponent();
@@ -212,7 +216,7 @@ namespace ProcessInfo
                 {
                     if(Process.GetProcessesByName("ProcessInfo").Length > 1)
                     {
-                        SWin();
+                        ShowWindow();
                     }
                     Thread.Sleep(100);
                 }
@@ -410,7 +414,7 @@ namespace ProcessInfo
                     contextMenuStrip1.BackColor = Program.backColor;
                     contextMenuStrip1.ForeColor = Program.foreColor;
 
-                    contextMenuStrip1.Items[0].Text = "-- " + ((Info)listBox1.Items[listBox1.SelectedIndex]).p.ProcessName + " --";
+                    contextMenuStrip1.Items[0].Text =((Info)listBox1.Items[listBox1.SelectedIndex]).p.ProcessName;
                     contextMenuStrip1.Show(Cursor.Position);
                 }
                 catch { }
@@ -424,26 +428,15 @@ namespace ProcessInfo
 
         private void label2_Click(object sender, EventArgs e)
         {
-            string path = ((Label)sender).Text;
+            ShowProcessFile(((Label)sender).Text);
+        }
+
+        private void ShowProcessFile(string path)
+        {
             if (File.Exists(path))
             {
                 Process.Start("explorer.exe", "/select,\"" + path + "\"");
             }
-            
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ProcessThreadsView pv = new ProcessThreadsView();
-            pv.p = ((Info)listBox1.Items[listBox1.SelectedIndex]).p;
-            pv.ShowDialog();
-        }
-
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            ProcessModulesView pv = new ProcessModulesView();
-            pv.p = ((Info)listBox1.Items[listBox1.SelectedIndex]).p;
-            pv.ShowDialog();
         }
 
         private void changeWindowNameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -475,16 +468,16 @@ namespace ProcessInfo
         {
             if(e.Button == MouseButtons.Left)
             {
-                SWin();
+                ShowWindow();
             }
         }
 
-        void SWin()
+        void ShowWindow()
         {
             hidden = false;
             Show();
             WindowState = FormWindowState.Normal;
-            Focus();
+            SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -500,6 +493,30 @@ namespace ProcessInfo
         private void resumeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResumeProcess(((Info)listBox1.Items[listBox1.SelectedIndex]).p);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ProcessThreadsView pv = new ProcessThreadsView();
+            pv.p = ((Info)listBox1.Items[listBox1.SelectedIndex]).p;
+            pv.ShowDialog();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ProcessModulesView pv = new ProcessModulesView();
+            pv.p = ((Info)listBox1.Items[listBox1.SelectedIndex]).p;
+            pv.ShowDialog();
+        }
+
+        private void kIllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IntPtr windowHandle = ((Info)listBox1.Items[listBox1.SelectedIndex]).p.MainWindowHandle;
+
+            if (windowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(windowHandle);
+            }
         }
 
         private void MainF_FormClosing(object sender, FormClosingEventArgs e)

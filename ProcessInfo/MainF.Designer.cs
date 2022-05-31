@@ -40,12 +40,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.kIllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.killToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeWindowNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.suspendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeWindowNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -192,15 +195,18 @@
             this.contextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kIllToolStripMenuItem,
+            this.toolStripMenuItem3,
             this.killToolStripMenuItem1,
+            this.changeWindowNameToolStripMenuItem,
+            this.toolStripMenuItem4,
             this.suspendToolStripMenuItem,
             this.resumeToolStripMenuItem,
+            this.toolStripMenuItem5,
             this.toolStripMenuItem2,
-            this.toolStripMenuItem1,
-            this.changeWindowNameToolStripMenuItem});
+            this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 198);
             // 
             // kIllToolStripMenuItem
             // 
@@ -210,6 +216,12 @@
             this.kIllToolStripMenuItem.Name = "kIllToolStripMenuItem";
             this.kIllToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.kIllToolStripMenuItem.Text = "-- pname --";
+            this.kIllToolStripMenuItem.Click += new System.EventHandler(this.kIllToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 6);
             // 
             // killToolStripMenuItem1
             // 
@@ -218,6 +230,19 @@
             this.killToolStripMenuItem1.Size = new System.Drawing.Size(197, 22);
             this.killToolStripMenuItem1.Text = "Kill";
             this.killToolStripMenuItem1.Click += new System.EventHandler(this.killToolStripMenuItem1_Click);
+            // 
+            // changeWindowNameToolStripMenuItem
+            // 
+            this.changeWindowNameToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
+            this.changeWindowNameToolStripMenuItem.Name = "changeWindowNameToolStripMenuItem";
+            this.changeWindowNameToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.changeWindowNameToolStripMenuItem.Text = "Change Window Name";
+            this.changeWindowNameToolStripMenuItem.Click += new System.EventHandler(this.changeWindowNameToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(194, 6);
             // 
             // suspendToolStripMenuItem
             // 
@@ -235,6 +260,11 @@
             this.resumeToolStripMenuItem.Text = "Resume";
             this.resumeToolStripMenuItem.Click += new System.EventHandler(this.resumeToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(194, 6);
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.ForeColor = System.Drawing.SystemColors.Control;
@@ -250,14 +280,6 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(197, 22);
             this.toolStripMenuItem1.Text = "Show Threads";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // changeWindowNameToolStripMenuItem
-            // 
-            this.changeWindowNameToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
-            this.changeWindowNameToolStripMenuItem.Name = "changeWindowNameToolStripMenuItem";
-            this.changeWindowNameToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.changeWindowNameToolStripMenuItem.Text = "Change Window Name";
-            this.changeWindowNameToolStripMenuItem.Click += new System.EventHandler(this.changeWindowNameToolStripMenuItem_Click);
             // 
             // notifyIcon1
             // 
@@ -332,6 +354,9 @@
         private System.Windows.Forms.ToolStripMenuItem suspendToolStripMenuItem;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
     }
 }
 
