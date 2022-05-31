@@ -169,7 +169,6 @@ namespace ProcessInfo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Close();
             HWin();
         }
 
@@ -187,8 +186,6 @@ namespace ProcessInfo
         private void Form1_Load(object sender, EventArgs e)
         {
             me = this;
-
-            // new Thread(Updater).Start();
 
             new Thread(ShowThread).Start();
 
@@ -218,23 +215,6 @@ namespace ProcessInfo
                         SWin();
                     }
                     Thread.Sleep(100);
-
-                    /*
-                    if (GetAsyncKeyState((int)Program.ShowKey) != 0)
-                    {
-                        Program.mainForm.Invoke(new MethodInvoker(() =>
-                        {
-                            if (hidden)
-                            {
-                                SWin();
-                            }
-                            else
-                            {
-                                WindowState = FormWindowState.Normal;
-                            }
-                        }));
-                        new Thread(UpdateList).Start();
-                    }*/
                 }
                 catch { }
             }
@@ -364,9 +344,6 @@ namespace ProcessInfo
                     return;
                 }
                 label1.Text = "ProcessInfo" + (sText == "" ? "" : " - ") + sText;
-
-                //UpdateList(sText);
-
                 
                 for (int i = 0; i < listBox1.Items.Count; i++)
                 {
@@ -507,7 +484,6 @@ namespace ProcessInfo
             hidden = false;
             Show();
             WindowState = FormWindowState.Normal;
-            // notifyIcon1.Visible = false;
             Focus();
         }
 
