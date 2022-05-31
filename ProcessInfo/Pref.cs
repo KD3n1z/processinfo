@@ -88,6 +88,9 @@ namespace ProcessInfo
             button6.Text = Program.KillKey.ToString();
             button8.Text = Program.ShowKey.ToString();
 
+            trackBar1.Value = Program.radius;
+            trackBar1_Scroll(this, null);
+
             MarkUpdateBtn();
 
             loaded = true;
@@ -268,36 +271,17 @@ namespace ProcessInfo
             textCB.BackColor = Program.foreColor = Color.FromArgb(int.Parse(vals[1]));
             backCB.BackColor = Program.backColor =  Color.FromArgb(int.Parse(vals[2]));
             dbackCB.BackColor = Program.darkBackColor = Color.FromArgb(int.Parse(vals[3]));
-
             try
             {
                 selCB.BackColor = Program.selColor = Color.FromArgb(int.Parse(vals[4]));
             }
             catch { }
 
-            trackBar1.Value = Program.radius;
-            trackBar1_Scroll(this, null);
-
 
             Program.mainForm.LoadTheme();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
         {
 
         }
@@ -306,11 +290,6 @@ namespace ProcessInfo
         {
             Program.ShowKey = e.KeyCode;
             button8.Text = Program.ShowKey.ToString();
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)

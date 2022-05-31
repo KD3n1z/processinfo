@@ -265,7 +265,6 @@
             this.label2.Size = new System.Drawing.Size(109, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "developed by kd3n1z";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // groupBox3
             // 
@@ -310,7 +309,6 @@
             this.button6.TabIndex = 1;
             this.button6.Text = "Delete";
             this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             this.button6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.button6_KeyDown);
             // 
             // button5
@@ -346,7 +344,6 @@
             this.button8.TabIndex = 4;
             this.button8.Text = "F7";
             this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             this.button8.KeyDown += new System.Windows.Forms.KeyEventHandler(this.button8_KeyDown);
             // 
             // label5
@@ -368,7 +365,6 @@
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "Auto-Launch";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Pref
             // 

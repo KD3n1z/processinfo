@@ -430,6 +430,9 @@ namespace ProcessInfo
             {
                 try
                 {
+                    contextMenuStrip1.BackColor = Program.backColor;
+                    contextMenuStrip1.ForeColor = Program.foreColor;
+
                     contextMenuStrip1.Items[0].Text = "-- " + ((Info)listBox1.Items[listBox1.SelectedIndex]).p.ProcessName + " --";
                     contextMenuStrip1.Show(Cursor.Position);
                 }
@@ -489,11 +492,6 @@ namespace ProcessInfo
         {
             sText = "";
             UpdateSel();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
@@ -559,13 +557,15 @@ namespace ProcessInfo
             string text = item.ToString();
             SizeF stringSize = e.Graphics.MeasureString(text, Font);
 
-            e.Graphics.DrawIcon(item.Icon, new Rectangle(2 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2));
+            int offset = 5;
+
+            e.Graphics.DrawIcon(item.Icon, new Rectangle(offset + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2));
 
             e.Graphics.DrawString(
                     text,
                     listBox1.Font,
                     new SolidBrush(listBox1.ForeColor),
-                    new PointF(e.Bounds.Height, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
+                    new PointF(offset + 1 + e.Bounds.Height, e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
                 );
         }
 
