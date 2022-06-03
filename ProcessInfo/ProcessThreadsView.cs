@@ -25,8 +25,8 @@ namespace ProcessInfo
 
             Text = p.ProcessName + "'s Threads";
 
-            listBox1.BackColor = Program.backColor;
-            listBox1.ForeColor = Program.foreColor;
+            listBox1.BackColor = Program.BackColor;
+            listBox1.ForeColor = Program.ForeColor;
 
             foreach(ProcessThread t in p.Threads)
             {

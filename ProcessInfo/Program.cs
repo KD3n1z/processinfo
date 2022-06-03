@@ -26,19 +26,19 @@ namespace ProcessInfo
 
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
-        public static Keys ShowKey = Keys.F7;
-        public static UpdateBehaviour ub = UpdateBehaviour.Ask;
-        public static Color backColor = Color.FromArgb(47, 47, 93);
-        public static Color darkBackColor = Color.FromArgb(39, 39, 78);
-        public static Color foreColor = Color.White;
-        public static Color selColor = Color.Blue;
-        public static int radius = 9;
+        public static UpdateBehaviour UpdateAction = UpdateBehaviour.Ask;
+        public static Color BackColor = Color.FromArgb(47, 47, 93);
+        public static Color DarkBackColor = Color.FromArgb(39, 39, 78);
+        public static Color ForeColor = Color.White;
+        public static Color SelColor = Color.Blue;
+        public static int Radius = 9;
+        public static string ThemeFile = "venus";
 
         public static MainF mainForm;
 
         public static string generalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "kd3n1z-general");
         public static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ProcessInfo");
-        public static string settings = Path.Combine(path, "settings");
+        public static string settingsPath = Path.Combine(path, "settings.txt");
 
         public static int latest = -1;
 
@@ -76,10 +76,6 @@ namespace ProcessInfo
             {
                 Directory.CreateDirectory(path);
             }
-            if (!Directory.Exists(settings))
-            {
-                Directory.CreateDirectory(settings);
-            }
 
             Load();
 
@@ -100,13 +96,13 @@ namespace ProcessInfo
         {
             latest = GetLatestVersion();
 
-            if (ub != UpdateBehaviour.Never)
+            if (UpdateAction != UpdateBehaviour.Never)
             {
                 try
                 {
                     if(latest > build)
                     {
-                        if(ub == UpdateBehaviour.Always)
+                        if(UpdateAction == UpdateBehaviour.Always)
                         {
                             Update();
                         }
@@ -163,16 +159,20 @@ namespace ProcessInfo
 
         public static void Save()
         {
-            File.WriteAllText(Path.Combine(settings, "bg.txt"), backColor.ToArgb().ToString());
-            File.WriteAllText(Path.Combine(settings, "dbg.txt"), darkBackColor.ToArgb().ToString());
-            File.WriteAllText(Path.Combine(settings, "fg.txt"), foreColor.ToArgb().ToString());
-            File.WriteAllText(Path.Combine(settings, "fg.txt"), foreColor.ToArgb().ToString());
-            File.WriteAllText(Path.Combine(settings, "sc.txt"), selColor.ToArgb().ToString());
-            File.WriteAllText(Path.Combine(settings, "br.txt"), radius.ToString());
-            File.WriteAllText(Path.Combine(settings, "ub.txt"), ((int)ub).ToString());
-            File.WriteAllText(Path.Combine(settings, "kk.txt"), ((int)KillKey).ToString());
-            File.WriteAllText(Path.Combine(settings, "uk.txt"), ((int)UpdateKey).ToString());
-            File.WriteAllText(Path.Combine(settings, "sk.txt"), ((int)ShowKey).ToString());
+            SettingsFile settingsFile = new SettingsFile();
+
+            settingsFile["backColor"] = BackColor.ToArgb().ToString();
+            settingsFile["darkBackColor"] = DarkBackColor.ToArgb().ToString();
+            settingsFile["foreColor"] = ForeColor.ToArgb().ToString();
+            settingsFile["selectionColor"] = SelColor.ToArgb().ToString();
+            settingsFile["radius"] = Radius.ToString();
+            settingsFile["update"] = ((int)UpdateAction).ToString();
+            settingsFile["killKey"] = ((int)KillKey).ToString();
+            settingsFile["updateKey"] = ((int)UpdateKey).ToString();
+            settingsFile["theme"] = ThemeFile;
+
+            File.WriteAllText(settingsPath, settingsFile.ToString());
+
         }
 
         static XElement ParseJsonFromUrl(string url)
@@ -185,43 +185,17 @@ namespace ProcessInfo
 
         static void Load()
         {
-            try
-            {
-                backColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "bg.txt"))));
-            } catch { }
-            try
-            {
-                darkBackColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "dbg.txt"))));
-            } catch { }
-            try
-            {
-                foreColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "fg.txt"))));
-            } catch { }
-            try
-            {
-                selColor = Color.FromArgb(int.Parse(File.ReadAllText(Path.Combine(settings, "sc.txt"))));
-            } catch { }
-            try
-            {
-                radius = int.Parse(File.ReadAllText(Path.Combine(settings, "br.txt")));
-            } catch { }
-            try
-            {
-                ub = (UpdateBehaviour)int.Parse(File.ReadAllText(Path.Combine(settings, "ub.txt")));
-            } catch { }
-            try
-            {
-                KillKey = (Keys)int.Parse(File.ReadAllText(Path.Combine(settings, "kk.txt")));
-            } catch { }
-            try
-            {
-                UpdateKey = (Keys)int.Parse(File.ReadAllText(Path.Combine(settings, "uk.txt")));
-            } catch { }
-            try
-            {
-                ShowKey = (Keys)int.Parse(File.ReadAllText(Path.Combine(settings, "sk.txt")));
-            } catch { }
-            
+            SettingsFile settingsFile = new SettingsFile(File.ReadAllText(settingsPath));
+
+            BackColor = Color.FromArgb(int.Parse(settingsFile["backColor"]));
+            DarkBackColor = Color.FromArgb(int.Parse(settingsFile["darkBackColor"]));
+            ForeColor = Color.FromArgb(int.Parse(settingsFile["foreColor"]));
+            SelColor = Color.FromArgb(int.Parse(settingsFile["selectionColor"]));
+            Radius = int.Parse(settingsFile["radius"]);
+            UpdateAction = (UpdateBehaviour)int.Parse(settingsFile["update"]);
+            KillKey = (Keys)int.Parse(settingsFile["killKey"]);
+            UpdateKey = (Keys)int.Parse(settingsFile["updateKey"]);
+            ThemeFile = settingsFile["theme"];
         }
     }
 }

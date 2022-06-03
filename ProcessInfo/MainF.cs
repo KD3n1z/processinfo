@@ -250,18 +250,18 @@ namespace ProcessInfo
         {
             foreach (Control c in Controls)
             {
-                c.ForeColor = Program.foreColor;
+                c.ForeColor = Program.ForeColor;
                 if ((string)c.Tag == "dark")
                 {
-                    c.BackColor = Program.darkBackColor;
+                    c.BackColor = Program.DarkBackColor;
                 }
                 else
                 {
-                    c.BackColor = Program.backColor;
+                    c.BackColor = Program.BackColor;
                 }
             }
 
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, Program.radius, Program.radius));
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, Program.Radius, Program.Radius));
         }
 
         void Updater()
@@ -433,8 +433,8 @@ namespace ProcessInfo
             {
                 try
                 {
-                    contextMenuStrip1.BackColor = Program.backColor;
-                    contextMenuStrip1.ForeColor = Program.foreColor;
+                    contextMenuStrip1.BackColor = Program.BackColor;
+                    contextMenuStrip1.ForeColor = Program.ForeColor;
 
                     contextMenuStrip1.Items[0].Text =((Info)listBox1.Items[listBox1.SelectedIndex]).p.ProcessName;
                     contextMenuStrip1.Show(Cursor.Position);
@@ -562,7 +562,7 @@ namespace ProcessInfo
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Program.selColor), e.Bounds);
+                e.Graphics.FillRectangle(new SolidBrush(Program.SelColor), e.Bounds);
             }
             else
             {

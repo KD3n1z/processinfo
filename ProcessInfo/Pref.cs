@@ -21,7 +21,6 @@ namespace ProcessInfo
             InitializeComponent();
         }
 
-        string themeFile = Path.Combine(Program.settings, "theme.txt");
         private void Pref_Load(object sender, EventArgs e)
         {
             try
@@ -53,7 +52,7 @@ namespace ProcessInfo
                     File.Delete(dPath);
                 }
                 catch { }
-                File.WriteAllText(themeFile, "venus");
+                Program.ThemeFile = "venus";
             }
 
             foreach(string f in Directory.GetFiles(themes).OrderByDescending(t => Path.GetFileNameWithoutExtension(t).StartsWith("def") || Path.GetFileNameWithoutExtension(t).StartsWith("light")))
@@ -63,15 +62,15 @@ namespace ProcessInfo
                     comboBox1.Items.Add(Path.GetFileNameWithoutExtension(f));
                 }
             }
-            comboBox1.Text = File.ReadAllText(themeFile);
+            comboBox1.Text = Program.ThemeFile;
 
-            textCB.BackColor = Program.foreColor;
-            backCB.BackColor = Program.backColor;
-            dbackCB.BackColor = Program.darkBackColor;
-            selCB.BackColor = Program.selColor;
+            textCB.BackColor = Program.ForeColor;
+            backCB.BackColor = Program.BackColor;
+            dbackCB.BackColor = Program.DarkBackColor;
+            selCB.BackColor = Program.SelColor;
             label1.Text += Program.build;
 
-            switch (Program.ub)
+            switch (Program.UpdateAction)
             {
                 case UpdateBehaviour.Always:
                     radioButton1.Checked = true;
@@ -86,9 +85,8 @@ namespace ProcessInfo
 
             button5.Text = Program.UpdateKey.ToString();
             button6.Text = Program.KillKey.ToString();
-            button8.Text = Program.ShowKey.ToString();
 
-            trackBar1.Value = Program.radius;
+            trackBar1.Value = Program.Radius;
             trackBar1_Scroll(this, null);
 
             MarkUpdateBtn();
@@ -125,16 +123,16 @@ namespace ProcessInfo
             switch (b.Tag.ToString())
             {
                 case "text":
-                    Program.foreColor = b.BackColor;
+                    Program.ForeColor = b.BackColor;
                     break;
                 case "bg":
-                    Program.backColor = b.BackColor;
+                    Program.BackColor = b.BackColor;
                     break;
                 case "dbg":
-                    Program.darkBackColor = b.BackColor;
+                    Program.DarkBackColor = b.BackColor;
                     break;
                 case "sel":
-                    Program.selColor = b.BackColor;
+                    Program.SelColor = b.BackColor;
                     break;
                 default:
                     break;
@@ -147,18 +145,18 @@ namespace ProcessInfo
         {
             if (radioButton1.Checked)
             {
-                Program.ub = UpdateBehaviour.Always;
+                Program.UpdateAction = UpdateBehaviour.Always;
             }
             else if (radioButton2.Checked)
             {
-                Program.ub = UpdateBehaviour.Never;
+                Program.UpdateAction = UpdateBehaviour.Never;
             }
             else
             {
-                Program.ub = UpdateBehaviour.Ask;
+                Program.UpdateAction = UpdateBehaviour.Ask;
             }
 
-            File.WriteAllText(themeFile, comboBox1.Text);
+            Program.ThemeFile = comboBox1.Text;
 
             Program.Save();
 
@@ -218,9 +216,13 @@ namespace ProcessInfo
         {
             if(File.Exists(Path.Combine(themes, comboBox1.Text + ".pit")))
             {
-                if (File.ReadAllText(Path.Combine(themes, comboBox1.Text + ".pit")).StartsWith("onlyread"))
+#if DEBUG
+                if (false)
+#else
+                if(File.ReadAllText(Path.Combine(themes, comboBox1.Text + ".pit")).StartsWith("onlyread"))
+#endif
                 {
-                    MessageBox.Show("you can't edit this theme (" + comboBox1.Text + "), enter another name to save it");
+                    MessageBox.Show("you can't edit this theme, enter another name to save it", "ProcessInfo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else
@@ -268,12 +270,12 @@ namespace ProcessInfo
         void LoadPIT(string pitName)
         {
             string[] vals = File.ReadAllText(Path.Combine(themes, pitName + ".pit")).Split('\n');
-            textCB.BackColor = Program.foreColor = Color.FromArgb(int.Parse(vals[1]));
-            backCB.BackColor = Program.backColor =  Color.FromArgb(int.Parse(vals[2]));
-            dbackCB.BackColor = Program.darkBackColor = Color.FromArgb(int.Parse(vals[3]));
+            textCB.BackColor = Program.ForeColor = Color.FromArgb(int.Parse(vals[1]));
+            backCB.BackColor = Program.BackColor =  Color.FromArgb(int.Parse(vals[2]));
+            dbackCB.BackColor = Program.DarkBackColor = Color.FromArgb(int.Parse(vals[3]));
             try
             {
-                selCB.BackColor = Program.selColor = Color.FromArgb(int.Parse(vals[4]));
+                selCB.BackColor = Program.SelColor = Color.FromArgb(int.Parse(vals[4]));
             }
             catch { }
 
@@ -286,17 +288,11 @@ namespace ProcessInfo
 
         }
 
-        private void button8_KeyDown(object sender, KeyEventArgs e)
-        {
-            Program.ShowKey = e.KeyCode;
-            button8.Text = Program.ShowKey.ToString();
-        }
-
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             label6.Text = "radius: " + trackBar1.Value + "px";
 
-            Program.radius = trackBar1.Value;
+            Program.Radius = trackBar1.Value;
 
             Program.mainForm.LoadTheme();
         }
