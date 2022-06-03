@@ -185,17 +185,21 @@ namespace ProcessInfo
 
         static void Load()
         {
-            SettingsFile settingsFile = new SettingsFile(File.ReadAllText(settingsPath));
+            try
+            {
+                SettingsFile settingsFile = new SettingsFile(File.ReadAllText(settingsPath));
 
-            BackColor = Color.FromArgb(int.Parse(settingsFile["backColor"]));
-            DarkBackColor = Color.FromArgb(int.Parse(settingsFile["darkBackColor"]));
-            ForeColor = Color.FromArgb(int.Parse(settingsFile["foreColor"]));
-            SelColor = Color.FromArgb(int.Parse(settingsFile["selectionColor"]));
-            Radius = int.Parse(settingsFile["radius"]);
-            UpdateAction = (UpdateBehaviour)int.Parse(settingsFile["update"]);
-            KillKey = (Keys)int.Parse(settingsFile["killKey"]);
-            UpdateKey = (Keys)int.Parse(settingsFile["updateKey"]);
-            ThemeFile = settingsFile["theme"];
+                BackColor = Color.FromArgb(int.Parse(settingsFile["backColor"]));
+                DarkBackColor = Color.FromArgb(int.Parse(settingsFile["darkBackColor"]));
+                ForeColor = Color.FromArgb(int.Parse(settingsFile["foreColor"]));
+                SelColor = Color.FromArgb(int.Parse(settingsFile["selectionColor"]));
+                Radius = int.Parse(settingsFile["radius"]);
+                UpdateAction = (UpdateBehaviour)int.Parse(settingsFile["update"]);
+                KillKey = (Keys)int.Parse(settingsFile["killKey"]);
+                UpdateKey = (Keys)int.Parse(settingsFile["updateKey"]);
+                ThemeFile = settingsFile["theme"];
+            }
+            catch { }
         }
     }
 }
