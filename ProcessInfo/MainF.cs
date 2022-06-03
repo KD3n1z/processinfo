@@ -274,8 +274,6 @@ namespace ProcessInfo
 
         bool canUpdate = true;
 
-
-        bool firstUpdate = true;
         void UpdateList() => UpdateList("");
         void UpdateList(string filter)
         {
@@ -310,21 +308,15 @@ namespace ProcessInfo
                     Info i = new Info(p);
                     if (!listBox1.Items.Contains(i))
                     {
+                        i.CacheIcon();
                         listBox1.Invoke(new MethodInvoker(() =>
                         {
                             listBox1.Items.Add(i);
                         }));
                     }
-
-                    // cache icons
-                    if (firstUpdate)
-                    {
-                        i.CacheIcon();
-                    }
                 }
                 canUpdate = true;
             }
-            firstUpdate = false;
         }
 
         string sText = "";
@@ -409,7 +401,11 @@ namespace ProcessInfo
 
                 label2.Text = i.FileName;
 
-                label1.Text = "ProcessInfo - process " + i.p.Id.ToString();
+                try
+                {
+                    label1.Text = "ProcessInfo - process " + i.p.Id.ToString();
+                }
+                catch { }
             }
             catch (Exception err)
             {
@@ -569,7 +565,11 @@ namespace ProcessInfo
                 e.Graphics.FillRectangle(new SolidBrush(listBox1.BackColor), e.Bounds);
             }
 
-            string text = item.ToString();
+            string text = "?";
+            if (item.p != null)
+            {
+                text = item.ToString();
+            }
             SizeF stringSize = e.Graphics.MeasureString(text, Font);
 
             int offset = 5;
@@ -652,9 +652,9 @@ namespace ProcessInfo
         public override string ToString()
         {
             string name = p.ProcessName;
-            if(name.Length > 20)
+            if (name.Length > 20)
             {
-                name = name.Substring(0,17) + "...";
+                name = name.Substring(0, 17) + "...";
             }
             return new string('0', 5 - p.Id.ToString().Length) + p.Id + " | " + name + new string(' ', 20 - name.Length) + " | " + p.MainWindowTitle;
         }
