@@ -19,6 +19,8 @@ namespace ProcessInfo
         public List<Info> rem = new List<Info>();
         public static MainF me;
 
+        bool running = true;
+
         #region extrenal methods
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -79,6 +81,47 @@ namespace ProcessInfo
         public MainF()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            me = this;
+
+            new Thread(CheckForOtherInstances).Start();
+
+            new Thread(ShortcutOpen).Start();
+
+            LoadTheme();
+
+            UpdateList();
+
+            if (Program.hidden)
+            {
+                BeginInvoke(new MethodInvoker(delegate
+                {
+                    HideWindow();
+                }));
+            }
+        }
+
+        void ShortcutOpen()
+        {
+            int tilde = (int)Keys.Oemtilde;
+            int control = (int)Keys.LControlKey;
+            int shift = (int)Keys.ShiftKey;
+
+            while (running)
+            {
+                if(GetAsyncKeyState(shift) != 0 && GetAsyncKeyState(control) != 0 && GetAsyncKeyState(tilde) != 0)
+                {
+                    Invoke(new MethodInvoker(() =>
+                    {
+                        ShowWindow();
+                    }));
+                }
+
+                Thread.Sleep(100);
+            }
         }
 
         public string KeyCodeToUnicode(Keys key)
@@ -173,7 +216,7 @@ namespace ProcessInfo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            HWin();
+            HideWindow();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -181,36 +224,15 @@ namespace ProcessInfo
             WindowState = FormWindowState.Minimized;
         }
 
-        void HWin()
+        void HideWindow()
         {
             Hide();
             notifyIcon1.Visible = true;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void CheckForOtherInstances()
         {
-            me = this;
-
-            new Thread(ShowThread).Start();
-
-            LoadTheme();
-
-            UpdateList();
-
-            if (Program.hidden)
-            {
-                BeginInvoke(new MethodInvoker(delegate
-                {
-                    HWin();
-                }));
-            }
-        }
-
-        bool run = true;
-
-        public void ShowThread()
-        {
-            while (run)
+            while (running)
             {
                 try
                 {
@@ -521,7 +543,7 @@ namespace ProcessInfo
 
         private void MainF_FormClosing(object sender, FormClosingEventArgs e)
         {
-            run = false;
+            running = false;
         }
 
         private void listBox1_DrawItem(object sender, DrawItemEventArgs e)

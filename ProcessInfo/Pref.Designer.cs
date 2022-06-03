@@ -55,6 +55,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -194,13 +195,14 @@
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(119, 513);
+            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.linkLabel1.Location = new System.Drawing.Point(0, 536);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(96, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(348, 25);
             this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "http://kd3n1z.com";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.Blue;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
@@ -268,13 +270,14 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Location = new System.Drawing.Point(12, 409);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(324, 100);
+            this.groupBox3.Size = new System.Drawing.Size(324, 124);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Shortcuts";
@@ -366,11 +369,23 @@
             this.checkBox1.Text = "Auto-Launch";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label7.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.ForeColor = System.Drawing.Color.Gray;
+            this.label7.Location = new System.Drawing.Point(3, 92);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(318, 29);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "press CTRL+SHIFT+` to open main window";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Pref
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 535);
+            this.ClientSize = new System.Drawing.Size(348, 561);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pictureBox1);
@@ -430,5 +445,6 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button selCB;
+        private System.Windows.Forms.Label label7;
     }
 }
