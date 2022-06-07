@@ -16,7 +16,6 @@ namespace ProcessInfo
     {
         bool hidden = false;
 
-        public List<Info> rem = new List<Info>();
         public static MainF me;
 
         bool running = true;
@@ -293,47 +292,52 @@ namespace ProcessInfo
 
         bool canUpdate = true;
 
-        void UpdateList() => UpdateList("");
-        void UpdateList(string filter)
+
+        void UpdateList()
         {
             if (canUpdate)
             {
+                int index = 0;
+                string text = "...";
+
+
+                Invoke(new MethodInvoker(() =>
+                {
+                    index = listBox1.SelectedIndex;
+                    text = label2.Text;
+                    label2.Text = "updating...";
+                }));
+
                 canUpdate = false;
-                rem.Clear();
-                foreach (object obj in listBox1.Items)
+
+                listBox1.Invoke(new MethodInvoker(() =>
                 {
-                    ((Info)obj).Refresh();
-                    if (filter != "")
-                    {
-                        Info i = (Info)obj;
-                        if (!rem.Contains(i))
-                        {
-                            if (!i.p.ProcessName.ToLower().StartsWith(filter) && !i.p.MainWindowTitle.StartsWith(filter))
-                            {
-                                rem.Add(i);
-                            }
-                        }
-                    }
-                }
-                foreach (Info i in rem)
+                    listBox1.Items.Clear();
+                }));
+
+                int processNum = 0;
+
+                Process[] processes = Process.GetProcesses();
+
+                foreach (Process p in processes.OrderBy(p => p.ProcessName).ThenBy(p => p.Id).ThenByDescending(p => p.MainWindowHandle != IntPtr.Zero))
                 {
-                    listBox1.Invoke(new MethodInvoker(() =>
+                    processNum++;
+                    Info i = new Info(p);
+                    i.CacheIcon();
+
+                    Invoke(new MethodInvoker(() =>
                     {
-                        listBox1.Items.Remove(i);
+                        listBox1.Items.Add(i);
+                        label2.Text = "updating... " + processNum + "/" + processes.Length;
                     }));
                 }
-                foreach (Process p in Process.GetProcesses().OrderBy(p => p.ProcessName).ThenBy(p => p.Id))
+
+                Invoke(new MethodInvoker(() =>
                 {
-                    Info i = new Info(p);
-                    if (!listBox1.Items.Contains(i))
-                    {
-                        i.CacheIcon();
-                        listBox1.Invoke(new MethodInvoker(() =>
-                        {
-                            listBox1.Items.Add(i);
-                        }));
-                    }
-                }
+                    listBox1.SelectedIndex = index;
+                    label2.Text = text;
+                }));
+
                 canUpdate = true;
             }
         }
@@ -399,6 +403,7 @@ namespace ProcessInfo
             try
             {
                 ((Info)listBox1.Items[listBox1.SelectedIndex]).p.Kill();
+                Thread.Sleep(100);
                 UpdateList();
             }
             catch (Exception err)
@@ -636,13 +641,6 @@ namespace ProcessInfo
                 new Pen(new SolidBrush(Program.DarkBackColor)),
                 new Rectangle(new Point(342, e.Bounds.Y), new Size(1, e.Bounds.Height))
                 );
-
-            /*e.Graphics.DrawString(
-                    text,
-                    listBox1.Font,
-                    new SolidBrush(listBox1.ForeColor),
-                    new PointF(offset + 2 + e.Bounds.Height, e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
-                );*/
         }
 
         private void openPrefs(object sender, EventArgs e)
@@ -716,19 +714,17 @@ namespace ProcessInfo
             }
         }
 
-        public void Refresh()
+        public bool Refresh()
         {
             try
             {
                 p = Process.GetProcessById(p.Id);
+                return true;
             }
             catch (ArgumentException)
             {
                 p = null;
-            }
-            if (p == null)
-            {
-                MainF.me.rem.Add(this);
+                return false;
             }
         }
         public override string ToString()
