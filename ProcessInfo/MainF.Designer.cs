@@ -138,11 +138,11 @@
             this.button3.Dock = System.Windows.Forms.DockStyle.Left;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = global::ProcessInfo.Properties.Resources.gear;
             this.button3.Location = new System.Drawing.Point(0, 0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(33, 33);
+            this.button3.Size = new System.Drawing.Size(55, 33);
             this.button3.TabIndex = 0;
+            this.button3.Text = "···";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.openPrefs);
             // 
@@ -152,7 +152,7 @@
             this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.listBox1.Font = new System.Drawing.Font("Consolas", 14F);
+            this.listBox1.Font = new System.Drawing.Font("Consolas", 13F);
             this.listBox1.ForeColor = System.Drawing.SystemColors.Window;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 22;
@@ -181,10 +181,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(3, 4);
+            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(12, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 19);
+            this.label2.Size = new System.Drawing.Size(28, 15);
             this.label2.TabIndex = 0;
             this.label2.Tag = "dark";
             this.label2.Text = "...";
@@ -206,7 +206,7 @@
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 198);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 176);
             // 
             // kIllToolStripMenuItem
             // 

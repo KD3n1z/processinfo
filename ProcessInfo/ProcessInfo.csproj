@@ -177,8 +177,7 @@
   <ItemGroup>
     <Content Include="Resources\piico.ico" />
     <Content Include="Resources\pilogo.png" />
-    <None Include="Resources\shell32_338.ico" />
-    <None Include="Resources\shell32_16826-7.png" />
+    <None Include="Resources\shell32_200.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

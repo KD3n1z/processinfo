@@ -54,7 +54,7 @@ namespace ProcessInfo
             string text = "# ProcessInfo settings";
             foreach(string key in settings.Keys)
             {
-                text += "\r\n" + key + ":\t" + settings[key];
+                text += "\r\n" + key + ": " + settings[key];
             }
 
             return text;

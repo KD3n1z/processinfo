@@ -69,6 +69,7 @@ namespace ProcessInfo
             dbackCB.BackColor = Program.DarkBackColor;
             selCB.BackColor = Program.SelColor;
             label1.Text += Program.build;
+            checkBox2.Checked = Program.shadow;
 
             switch (Program.UpdateAction)
             {
@@ -285,7 +286,7 @@ namespace ProcessInfo
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            Process.Start("explorer.exe", "/select,\"" + Process.GetCurrentProcess().MainModule.FileName + "\"");
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -293,6 +294,13 @@ namespace ProcessInfo
             label6.Text = "radius: " + trackBar1.Value + "px";
 
             Program.Radius = trackBar1.Value;
+
+            Program.mainForm.LoadTheme();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.shadow = checkBox2.Checked;
 
             Program.mainForm.LoadTheme();
         }

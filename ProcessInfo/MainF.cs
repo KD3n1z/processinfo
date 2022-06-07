@@ -78,6 +78,25 @@ namespace ProcessInfo
         static extern bool SetForegroundWindow(IntPtr hWnd);
         #endregion
 
+        #region shadow
+
+        private const int CS_DropShadow = 0x20000;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                if (Program.shadow)
+                {
+                    cp.ClassStyle |= CS_DropShadow;
+                }
+                return cp;
+            }
+        }
+
+        #endregion
+
         public MainF()
         {
             InitializeComponent();
@@ -429,8 +448,15 @@ namespace ProcessInfo
             {
                 try
                 {
-                    contextMenuStrip1.BackColor = Program.BackColor;
-                    contextMenuStrip1.ForeColor = Program.ForeColor;
+                    contextMenuStrip1.BackColor = Program.DarkBackColor;
+                    foreach (object item in contextMenuStrip1.Items)
+                    {
+                        if (item is ToolStripMenuItem)
+                        {
+                            (item as ToolStripMenuItem).ForeColor = Program.ForeColor;
+                        }
+
+                    }
 
                     contextMenuStrip1.Items[0].Text =((Info)listBox1.Items[listBox1.SelectedIndex]).p.ProcessName;
                     contextMenuStrip1.Show(Cursor.Position);
@@ -495,6 +521,7 @@ namespace ProcessInfo
             hidden = false;
             Show();
             WindowState = FormWindowState.Normal;
+            Thread.Sleep(30);
             SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
         }
 
@@ -572,16 +599,50 @@ namespace ProcessInfo
             }
             SizeF stringSize = e.Graphics.MeasureString(text, Font);
 
-            int offset = 5;
-
-            e.Graphics.DrawIcon(item.Icon, new Rectangle(offset + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2));
+            e.Graphics.DrawIcon(
+                item.Icon,
+                new Rectangle(16 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2)
+                );
 
             e.Graphics.DrawString(
+                    item.FormattedPID,
+                    listBox1.Font,
+                    new SolidBrush(listBox1.ForeColor),
+                    new PointF(20 + e.Bounds.Height, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
+                );
+
+            e.Graphics.DrawString(
+                    item.FormattedName,
+                    listBox1.Font,
+                    new SolidBrush(listBox1.ForeColor),
+                    new PointF(121, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
+                );
+
+            e.Graphics.DrawString(
+                    item.p.MainWindowTitle,
+                    listBox1.Font,
+                    new SolidBrush(listBox1.ForeColor),
+                    new PointF(352, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
+                );
+
+
+            e.Graphics.DrawRectangle(
+                new Pen(new SolidBrush(Program.DarkBackColor)),
+                new Rectangle(new Point(108, e.Bounds.Y), new Size(1, e.Bounds.Height))
+                );
+
+
+            e.Graphics.DrawRectangle(
+                new Pen(new SolidBrush(Program.DarkBackColor)),
+                new Rectangle(new Point(342, e.Bounds.Y), new Size(1, e.Bounds.Height))
+                );
+
+            /*e.Graphics.DrawString(
                     text,
                     listBox1.Font,
                     new SolidBrush(listBox1.ForeColor),
-                    new PointF(offset + 1 + e.Bounds.Height, e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
-                );
+                    new PointF(offset + 2 + e.Bounds.Height, e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
+                );*/
         }
 
         private void openPrefs(object sender, EventArgs e)
@@ -634,6 +695,27 @@ namespace ProcessInfo
             }
         }
 
+        public string FormattedPID
+        {
+            get
+            {
+                return new string('0', 5 - p.Id.ToString().Length) + p.Id;
+            }
+        }
+
+        public string FormattedName
+        {
+            get
+            {
+                string name = p.ProcessName;
+                if (name.Length > 20)
+                {
+                    name = name.Substring(0, 17) + "...";
+                }
+                return name + new string(' ', 20 - name.Length);
+            }
+        }
+
         public void Refresh()
         {
             try
@@ -651,12 +733,7 @@ namespace ProcessInfo
         }
         public override string ToString()
         {
-            string name = p.ProcessName;
-            if (name.Length > 20)
-            {
-                name = name.Substring(0, 17) + "...";
-            }
-            return new string('0', 5 - p.Id.ToString().Length) + p.Id + " | " + name + new string(' ', 20 - name.Length) + " | " + p.MainWindowTitle;
+            return FormattedPID + " | " + FormattedName + " | " + p.MainWindowTitle;
         }
 
         public Info(Process pr)

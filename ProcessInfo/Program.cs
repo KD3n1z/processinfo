@@ -22,7 +22,7 @@ namespace ProcessInfo
     }
     internal static class Program
     {
-        public static int build = 9;
+        public static int build = 10;
 
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
@@ -31,8 +31,9 @@ namespace ProcessInfo
         public static Color DarkBackColor = Color.FromArgb(39, 39, 78);
         public static Color ForeColor = Color.White;
         public static Color SelColor = Color.Blue;
-        public static int Radius = 9;
+        public static int Radius = 15;
         public static string ThemeFile = "venus";
+        public static bool shadow = false;
 
         public static MainF mainForm;
 
@@ -170,6 +171,7 @@ namespace ProcessInfo
             settingsFile["killKey"] = ((int)KillKey).ToString();
             settingsFile["updateKey"] = ((int)UpdateKey).ToString();
             settingsFile["theme"] = ThemeFile;
+            settingsFile["shadow"] = shadow.ToString();
 
             File.WriteAllText(settingsPath, settingsFile.ToString());
 
@@ -198,6 +200,7 @@ namespace ProcessInfo
                 KillKey = (Keys)int.Parse(settingsFile["killKey"]);
                 UpdateKey = (Keys)int.Parse(settingsFile["updateKey"]);
                 ThemeFile = settingsFile["theme"];
+                shadow = settingsFile["shadow"].ToLower() == "true";
             }
             catch { }
         }
