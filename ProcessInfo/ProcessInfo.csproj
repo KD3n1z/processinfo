@@ -175,6 +175,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\mac_hide.png" />
+    <None Include="Resources\mac_close.png" />
     <Content Include="Resources\piico.ico" />
     <Content Include="Resources\pilogo.png" />
     <None Include="Resources\shell32_200.ico" />
