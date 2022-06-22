@@ -127,6 +127,9 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(66, 32);
             this.panel4.TabIndex = 5;
+            this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // button5
             // 
@@ -134,9 +137,9 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(14, 9);
+            this.button5.Location = new System.Drawing.Point(20, 10);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(13, 13);
+            this.button5.Size = new System.Drawing.Size(11, 11);
             this.button5.TabIndex = 1;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button2_Click);
@@ -147,9 +150,9 @@
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(40, 9);
+            this.button4.Location = new System.Drawing.Point(42, 10);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(13, 13);
+            this.button4.Size = new System.Drawing.Size(11, 11);
             this.button4.TabIndex = 0;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button1_Click);
