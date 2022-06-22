@@ -645,7 +645,33 @@ namespace ProcessInfo
 
         private void openPrefs(object sender, EventArgs e)
         {
-            new Pref().ShowDialog();
+            Pref p = new Pref();
+            p.ShowDialog();
+            if (p.restartRequired)
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
+        }
+
+        private void button5_MouseEnter(object sender, EventArgs e)
+        {
+            button5.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide_hover;
+        }
+
+        private void button5_MouseLeave(object sender, EventArgs e)
+        {
+            button5.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide;
+        }
+
+        private void button4_MouseEnter(object sender, EventArgs e)
+        {
+            button4.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close_hover;
+        }
+
+        private void button4_MouseLeave(object sender, EventArgs e)
+        {
+            button4.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close;
         }
     }
 

@@ -13,6 +13,8 @@ namespace ProcessInfo
 {
     public partial class Pref : Form
     {
+       public bool restartRequired = false;
+
         RegistryKey alReg;
 
         string themes = Path.Combine(Program.generalPath, "themes");
@@ -178,7 +180,7 @@ namespace ProcessInfo
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://kd3n1z.com/index.php?app=ProcessInfo");
+            Process.Start("https://kd3n1z.com/index.php?app=ProcessInfo");
         }
 
         private void button5_KeyDown(object sender, KeyEventArgs e)
@@ -302,7 +304,7 @@ namespace ProcessInfo
         {
             Program.shadow = checkBox2.Checked;
 
-            Program.mainForm.LoadTheme();
+            restartRequired = true;
         }
     }
 }
