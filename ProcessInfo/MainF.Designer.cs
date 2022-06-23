@@ -35,8 +35,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.hideButton = new System.Windows.Forms.PictureBox();
+            this.closeButton = new System.Windows.Forms.PictureBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,6 +57,8 @@
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hideButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeButton)).BeginInit();
             this.panel2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
@@ -120,8 +122,8 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.button5);
-            this.panel4.Controls.Add(this.button4);
+            this.panel4.Controls.Add(this.hideButton);
+            this.panel4.Controls.Add(this.closeButton);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(653, 0);
             this.panel4.Name = "panel4";
@@ -131,35 +133,31 @@
             this.panel4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
-            // button5
+            // hideButton
             // 
-            this.button5.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(19, 7);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(11, 11);
-            this.button5.TabIndex = 1;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button2_Click);
-            this.button5.MouseEnter += new System.EventHandler(this.button5_MouseEnter);
-            this.button5.MouseLeave += new System.EventHandler(this.button5_MouseLeave);
+            this.hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide;
+            this.hideButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.hideButton.Location = new System.Drawing.Point(19, 7);
+            this.hideButton.Name = "hideButton";
+            this.hideButton.Size = new System.Drawing.Size(11, 11);
+            this.hideButton.TabIndex = 1;
+            this.hideButton.TabStop = false;
+            this.hideButton.Click += new System.EventHandler(this.button2_Click);
+            this.hideButton.MouseEnter += new System.EventHandler(this.button5_MouseEnter);
+            this.hideButton.MouseLeave += new System.EventHandler(this.button5_MouseLeave);
             // 
-            // button4
+            // closeButton
             // 
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(38, 7);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(11, 11);
-            this.button4.TabIndex = 0;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button1_Click);
-            this.button4.MouseEnter += new System.EventHandler(this.button4_MouseEnter);
-            this.button4.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
+            this.closeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("closeButton.BackgroundImage")));
+            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.closeButton.Location = new System.Drawing.Point(38, 7);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(11, 11);
+            this.closeButton.TabIndex = 0;
+            this.closeButton.TabStop = false;
+            this.closeButton.Click += new System.EventHandler(this.button1_Click);
+            this.closeButton.MouseEnter += new System.EventHandler(this.button4_MouseEnter);
+            this.closeButton.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
             // 
             // listBox1
             // 
@@ -341,6 +339,8 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hideButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeButton)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -373,8 +373,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.PictureBox closeButton;
+        private System.Windows.Forms.PictureBox hideButton;
     }
 }
 

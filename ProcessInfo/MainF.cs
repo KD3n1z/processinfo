@@ -667,22 +667,22 @@ namespace ProcessInfo
 
         private void button5_MouseEnter(object sender, EventArgs e)
         {
-            button5.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide_hover;
+            hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide_hover;
         }
 
         private void button5_MouseLeave(object sender, EventArgs e)
         {
-            button5.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide;
+            hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide;
         }
 
         private void button4_MouseEnter(object sender, EventArgs e)
         {
-            button4.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close_hover;
+            closeButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close_hover;
         }
 
         private void button4_MouseLeave(object sender, EventArgs e)
         {
-            button4.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close;
+            closeButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close;
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
