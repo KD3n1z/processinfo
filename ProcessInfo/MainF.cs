@@ -319,7 +319,7 @@ namespace ProcessInfo
 
                 Process[] processes = Process.GetProcesses();
 
-                foreach (Process p in processes.OrderBy(p => p.ProcessName).ThenBy(p => p.Id).ThenByDescending(p => p.MainWindowHandle != IntPtr.Zero))
+                foreach (Process p in processes.OrderBy(p => p.ProcessName).ThenBy(p => string.IsNullOrWhiteSpace(p.MainWindowTitle)).ThenBy(p => p.Id))
                 {
                     processNum++;
                     Info i = new Info(p);

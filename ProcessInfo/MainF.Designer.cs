@@ -71,7 +71,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(708, 30);
+            this.panel1.Size = new System.Drawing.Size(708, 24);
             this.panel1.TabIndex = 0;
             this.panel1.Tag = "dark";
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -84,7 +84,7 @@
             this.label1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(55, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(598, 30);
+            this.label1.Size = new System.Drawing.Size(598, 24);
             this.label1.TabIndex = 1;
             this.label1.Tag = "dark";
             this.label1.Text = "ProcessInfo";
@@ -99,7 +99,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(55, 30);
+            this.panel3.Size = new System.Drawing.Size(55, 24);
             this.panel3.TabIndex = 4;
             this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -112,7 +112,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Location = new System.Drawing.Point(0, 0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(55, 30);
+            this.button3.Size = new System.Drawing.Size(55, 24);
             this.button3.TabIndex = 0;
             this.button3.Text = "···";
             this.button3.UseVisualStyleBackColor = true;
@@ -125,7 +125,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(653, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(55, 30);
+            this.panel4.Size = new System.Drawing.Size(55, 24);
             this.panel4.TabIndex = 5;
             this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -137,7 +137,7 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(12, 10);
+            this.button5.Location = new System.Drawing.Point(19, 7);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(11, 11);
             this.button5.TabIndex = 1;
@@ -152,7 +152,7 @@
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(32, 10);
+            this.button4.Location = new System.Drawing.Point(38, 7);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(11, 11);
             this.button4.TabIndex = 0;
@@ -171,9 +171,9 @@
             this.listBox1.ForeColor = System.Drawing.SystemColors.Window;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 22;
-            this.listBox1.Location = new System.Drawing.Point(0, 30);
+            this.listBox1.Location = new System.Drawing.Point(0, 24);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(708, 361);
+            this.listBox1.Size = new System.Drawing.Size(708, 352);
             this.listBox1.TabIndex = 1;
             this.listBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick_1);
             this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
@@ -187,9 +187,9 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(78)))));
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 391);
+            this.panel2.Location = new System.Drawing.Point(0, 376);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(708, 28);
+            this.panel2.Size = new System.Drawing.Size(708, 22);
             this.panel2.TabIndex = 2;
             this.panel2.Tag = "dark";
             // 
@@ -197,7 +197,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(12, 6);
+            this.label2.Location = new System.Drawing.Point(12, 3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 15);
             this.label2.TabIndex = 0;
@@ -323,7 +323,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(708, 419);
+            this.ClientSize = new System.Drawing.Size(708, 398);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
