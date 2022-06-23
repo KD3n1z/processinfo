@@ -129,5 +129,15 @@ namespace ProcessInfo.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon pinotify {
+            get {
+                object obj = ResourceManager.GetObject("pinotify", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

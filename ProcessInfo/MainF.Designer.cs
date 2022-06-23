@@ -299,10 +299,11 @@
             // notifyIcon1
             // 
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip2;
-            this.notifyIcon1.Icon = global::ProcessInfo.Properties.Resources.piico;
+            this.notifyIcon1.Icon = global::ProcessInfo.Properties.Resources.pinotify;
             this.notifyIcon1.Text = "ProcessInfo";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // contextMenuStrip2
             // 

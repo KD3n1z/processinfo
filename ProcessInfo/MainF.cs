@@ -684,6 +684,11 @@ namespace ProcessInfo
         {
             button4.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close;
         }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ShowWindow();
+        }
     }
 
     public class Info
