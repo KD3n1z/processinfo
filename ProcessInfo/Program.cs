@@ -22,7 +22,7 @@ namespace ProcessInfo
     }
     internal static class Program
     {
-        public static int build = 12;
+        public static int build = 13;
 
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;

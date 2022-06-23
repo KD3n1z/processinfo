@@ -234,12 +234,12 @@ namespace ProcessInfo
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void closeButton_Click(object sender, EventArgs e)
         {
             HideWindow();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void hideButton_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
         }
@@ -665,22 +665,22 @@ namespace ProcessInfo
             }
         }
 
-        private void button5_MouseEnter(object sender, EventArgs e)
+        private void hideButton_MouseEnter(object sender, EventArgs e)
         {
             hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide_hover;
         }
 
-        private void button5_MouseLeave(object sender, EventArgs e)
+        private void hideButton_MouseLeave(object sender, EventArgs e)
         {
             hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide;
         }
 
-        private void button4_MouseEnter(object sender, EventArgs e)
+        private void closeButton_MouseEnter(object sender, EventArgs e)
         {
             closeButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close_hover;
         }
 
-        private void button4_MouseLeave(object sender, EventArgs e)
+        private void closeButton_MouseLeave(object sender, EventArgs e)
         {
             closeButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close;
         }
@@ -688,6 +688,26 @@ namespace ProcessInfo
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ShowWindow();
+        }
+
+        private void closeButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            closeButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close_down;
+        }
+
+        private void closeButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            closeButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_close_hover;
+        }
+
+        private void hideButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide_down;
+        }
+
+        private void hideButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide_hover;
         }
     }
 

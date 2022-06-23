@@ -180,6 +180,8 @@
     <None Include="Resources\mac_close_hover.png" />
     <None Include="Resources\mac_hide_hover.png" />
     <None Include="Resources\mac_close.png" />
+    <None Include="Resources\mac_close_down.png" />
+    <None Include="Resources\mac_hide_down.png" />
     <Content Include="Resources\piico.ico" />
     <Content Include="Resources\pilogo.png" />
     <None Include="Resources\shell32_200.ico" />

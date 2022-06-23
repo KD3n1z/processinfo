@@ -142,9 +142,11 @@
             this.hideButton.Size = new System.Drawing.Size(11, 11);
             this.hideButton.TabIndex = 1;
             this.hideButton.TabStop = false;
-            this.hideButton.Click += new System.EventHandler(this.button2_Click);
-            this.hideButton.MouseEnter += new System.EventHandler(this.button5_MouseEnter);
-            this.hideButton.MouseLeave += new System.EventHandler(this.button5_MouseLeave);
+            this.hideButton.Click += new System.EventHandler(this.hideButton_Click);
+            this.hideButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.hideButton_MouseDown);
+            this.hideButton.MouseEnter += new System.EventHandler(this.hideButton_MouseEnter);
+            this.hideButton.MouseLeave += new System.EventHandler(this.hideButton_MouseLeave);
+            this.hideButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.hideButton_MouseUp);
             // 
             // closeButton
             // 
@@ -155,9 +157,11 @@
             this.closeButton.Size = new System.Drawing.Size(11, 11);
             this.closeButton.TabIndex = 0;
             this.closeButton.TabStop = false;
-            this.closeButton.Click += new System.EventHandler(this.button1_Click);
-            this.closeButton.MouseEnter += new System.EventHandler(this.button4_MouseEnter);
-            this.closeButton.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.closeButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.closeButton_MouseDown);
+            this.closeButton.MouseEnter += new System.EventHandler(this.closeButton_MouseEnter);
+            this.closeButton.MouseLeave += new System.EventHandler(this.closeButton_MouseLeave);
+            this.closeButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.closeButton_MouseUp);
             // 
             // listBox1
             // 
