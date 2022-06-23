@@ -14,8 +14,6 @@ namespace ProcessInfo
 {
     public partial class MainF : Form
     {
-        bool hidden = false;
-
         public static MainF me;
 
         bool running = true;
@@ -302,6 +300,7 @@ namespace ProcessInfo
             if (canUpdate)
             {
                 int index = 0;
+                int topIndex = 0;
                 string text = "...";
 
 
@@ -310,6 +309,7 @@ namespace ProcessInfo
                     index = listBox1.SelectedIndex;
                     text = label2.Text;
                     label2.Text = "updating...";
+                    topIndex = listBox1.TopIndex;
                     LockWindowUpdate((long)listBox1.Handle);
                 }));
 
@@ -339,7 +339,12 @@ namespace ProcessInfo
 
                 Invoke(new MethodInvoker(() =>
                 {
-                    listBox1.SelectedIndex = index;
+                    try
+                    {
+                        listBox1.SelectedIndex = index;
+                        listBox1.TopIndex = topIndex;
+                    }
+                    catch { }
                     label2.Text = text;
                     LockWindowUpdate(0);
                 }));
@@ -530,7 +535,6 @@ namespace ProcessInfo
 
         void ShowWindow()
         {
-            hidden = false;
             Show();
             WindowState = FormWindowState.Normal;
             Thread.Sleep(30);
