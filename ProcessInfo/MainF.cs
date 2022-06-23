@@ -74,7 +74,11 @@ namespace ProcessInfo
         static extern int GetAsyncKeyState(Int32 i);
 
         [DllImport("user32.dll")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
+        static extern bool SetForegroundWindow(IntPtr hWnd); 
+
+        [DllImport("user32.dll")]
+        private static extern long LockWindowUpdate(long Handle);
+
         #endregion
 
         #region shadow
@@ -306,6 +310,7 @@ namespace ProcessInfo
                     index = listBox1.SelectedIndex;
                     text = label2.Text;
                     label2.Text = "updating...";
+                    LockWindowUpdate((long)listBox1.Handle);
                 }));
 
                 canUpdate = false;
@@ -336,9 +341,11 @@ namespace ProcessInfo
                 {
                     listBox1.SelectedIndex = index;
                     label2.Text = text;
+                    LockWindowUpdate(0);
                 }));
 
                 canUpdate = true;
+
             }
         }
 
