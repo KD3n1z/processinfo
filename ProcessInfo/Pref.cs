@@ -304,9 +304,11 @@ namespace ProcessInfo
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            Program.Shadow = checkBox2.Checked;
-
-            restartRequired = true;
+            if (loaded)
+            {
+                Program.Shadow = checkBox2.Checked;
+                restartRequired = true;
+            }
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
