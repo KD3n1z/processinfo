@@ -71,7 +71,7 @@ namespace ProcessInfo
             dbackCB.BackColor = Program.DarkBackColor;
             selCB.BackColor = Program.SelColor;
             label1.Text += Program.build;
-            checkBox2.Checked = Program.shadow;
+            checkBox2.Checked = Program.Shadow;
 
             switch (Program.UpdateAction)
             {
@@ -90,7 +90,9 @@ namespace ProcessInfo
             button6.Text = Program.KillKey.ToString();
 
             trackBar1.Value = Program.Radius;
+            trackBar2.Value = Program.AutoUpdateRate;
             trackBar1_Scroll(this, null);
+            trackBar2_Scroll(this, null);
 
             MarkUpdateBtn();
 
@@ -293,7 +295,7 @@ namespace ProcessInfo
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            label6.Text = "radius: " + trackBar1.Value + "px";
+            label6.Text = "Radius: " + trackBar1.Value + "px";
 
             Program.Radius = trackBar1.Value;
 
@@ -302,9 +304,27 @@ namespace ProcessInfo
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            Program.shadow = checkBox2.Checked;
+            Program.Shadow = checkBox2.Checked;
 
             restartRequired = true;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            string val = trackBar2.Value.ToString();
+
+            if(val == "21")
+            {
+                val = "never";
+            }
+            else
+            {
+                val += "s";
+            }
+
+            label8.Text = "Auto-Update rate: " + val;
+
+            Program.AutoUpdateRate = trackBar2.Value;
         }
     }
 }

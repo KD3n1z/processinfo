@@ -90,7 +90,7 @@ namespace ProcessInfo
             get
             {
                 CreateParams cp = base.CreateParams;
-                if (Program.shadow)
+                if (Program.Shadow)
                 {
                     cp.ClassStyle |= CS_DropShadow;
                 }
@@ -130,14 +130,14 @@ namespace ProcessInfo
 
         void AutoUpdate()
         {
-            while (true)
+            while (running)
             {
-                if (hidden)
+                if (hidden && Program.AutoUpdateRate != 21)
                 {
                     UpdateList();
                 }
 
-                Thread.Sleep(10000);
+                Thread.Sleep(Program.AutoUpdateRate * 1000);
             }
         }
 

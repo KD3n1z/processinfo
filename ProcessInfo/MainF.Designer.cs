@@ -333,7 +333,7 @@
             this.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = global::ProcessInfo.Properties.Resources.piico;
+            this.Icon = global::ProcessInfo.Properties.Resources.pinotify;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainF";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

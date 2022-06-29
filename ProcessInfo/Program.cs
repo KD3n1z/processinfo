@@ -33,7 +33,8 @@ namespace ProcessInfo
         public static Color SelColor = Color.Blue;
         public static int Radius = 15;
         public static string ThemeFile = "venus";
-        public static bool shadow = false;
+        public static bool Shadow = false;
+        public static int AutoUpdateRate = 10;
 
         public static MainF mainForm;
 
@@ -171,7 +172,8 @@ namespace ProcessInfo
             settingsFile["killKey"] = ((int)KillKey).ToString();
             settingsFile["updateKey"] = ((int)UpdateKey).ToString();
             settingsFile["theme"] = ThemeFile;
-            settingsFile["shadow"] = shadow.ToString();
+            settingsFile["shadow"] = Shadow.ToString();
+            settingsFile["autoUpdateRate"] = AutoUpdateRate.ToString();
 
             File.WriteAllText(settingsPath, settingsFile.ToString());
 
@@ -200,7 +202,8 @@ namespace ProcessInfo
                 KillKey = (Keys)int.Parse(settingsFile["killKey"]);
                 UpdateKey = (Keys)int.Parse(settingsFile["updateKey"]);
                 ThemeFile = settingsFile["theme"];
-                shadow = settingsFile["shadow"].ToLower() == "true";
+                Shadow = settingsFile["shadow"].ToLower() == "true";
+                AutoUpdateRate = int.Parse(settingsFile["autoUpdateRate"]);
             }
             catch { }
         }
