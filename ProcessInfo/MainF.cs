@@ -16,6 +16,8 @@ namespace ProcessInfo
     {
         public static MainF me;
 
+        bool hidden = false;
+
         bool running = true;
 
         #region extrenal methods
@@ -111,6 +113,8 @@ namespace ProcessInfo
 
             new Thread(ShortcutOpen).Start();
 
+            new Thread(AutoUpdate).Start();
+
             LoadTheme();
 
             UpdateList();
@@ -121,6 +125,19 @@ namespace ProcessInfo
                 {
                     HideWindow();
                 }));
+            }
+        }
+
+        void AutoUpdate()
+        {
+            while (true)
+            {
+                if (hidden)
+                {
+                    UpdateList();
+                }
+
+                Thread.Sleep(10000);
             }
         }
 
@@ -242,12 +259,6 @@ namespace ProcessInfo
         private void hideButton_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
-        }
-
-        void HideWindow()
-        {
-            Hide();
-            notifyIcon1.Visible = true;
         }
 
         public void CheckForOtherInstances()
@@ -533,8 +544,16 @@ namespace ProcessInfo
             }
         }
 
+        void HideWindow()
+        {
+            hidden = true;
+            Hide();
+            notifyIcon1.Visible = true;
+        }
+
         void ShowWindow()
         {
+            hidden = false;
             Show();
             WindowState = FormWindowState.Normal;
             Thread.Sleep(30);
