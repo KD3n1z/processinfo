@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProcessInfo
@@ -78,6 +79,67 @@ namespace ProcessInfo
 
         [DllImport("user32.dll")]
         private static extern long LockWindowUpdate(long Handle);
+
+        // DLL INJECTION
+
+        [DllImport("kernel32")]
+        public static extern IntPtr CreateRemoteThread(
+            IntPtr hProcess,
+            IntPtr lpThreadAttributes,
+            uint dwStackSize,
+            UIntPtr lpStartAddress,
+            IntPtr lpParameter,
+            uint dwCreationFlags,
+            out IntPtr lpThreadId
+        );
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenProcess(
+            UInt32 dwDesiredAccess,
+            Int32 bInheritHandle,
+            Int32 dwProcessId
+        );
+
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        static extern bool VirtualFreeEx(
+            IntPtr hProcess,
+            IntPtr lpAddress,
+            UIntPtr dwSize,
+            uint dwFreeType
+        );
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern UIntPtr GetProcAddress(
+            IntPtr hModule,
+            string procName
+        );
+
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        static extern IntPtr VirtualAllocEx(
+            IntPtr hProcess,
+            IntPtr lpAddress,
+            uint dwSize,
+            uint flAllocationType,
+            uint flProtect
+        );
+
+        [DllImport("kernel32.dll")]
+        static extern bool WriteProcessMemory(
+            IntPtr hProcess,
+            IntPtr lpBaseAddress,
+            string lpBuffer,
+            UIntPtr nSize,
+            out IntPtr lpNumberOfBytesWritten
+        );
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        [DllImport("kernel32", SetLastError = true, ExactSpelling = true)]
+        internal static extern Int32 WaitForSingleObject(
+            IntPtr handle,
+            Int32 milliseconds
+        );
 
         #endregion
 
@@ -317,18 +379,18 @@ namespace ProcessInfo
 
                 Invoke(new MethodInvoker(() =>
                 {
-                    index = listBox1.SelectedIndex;
-                    text = label2.Text;
-                    label2.Text = "updating...";
-                    topIndex = listBox1.TopIndex;
-                    LockWindowUpdate((long)listBox1.Handle);
+                    index = processesList.SelectedIndex;
+                    text = statusLabel.Text;
+                    statusLabel.Text = "updating...";
+                    topIndex = processesList.TopIndex;
+                    LockWindowUpdate((long)processesList.Handle);
                 }));
 
                 canUpdate = false;
 
-                listBox1.Invoke(new MethodInvoker(() =>
+                processesList.Invoke(new MethodInvoker(() =>
                 {
-                    listBox1.Items.Clear();
+                    processesList.Items.Clear();
                 }));
 
                 int processNum = 0;
@@ -343,8 +405,8 @@ namespace ProcessInfo
 
                     Invoke(new MethodInvoker(() =>
                     {
-                        listBox1.Items.Add(i);
-                        label2.Text = "updating... " + processNum + "/" + processes.Length;
+                        processesList.Items.Add(i);
+                        statusLabel.Text = "updating... " + processNum + "/" + processes.Length;
                     }));
                 }
 
@@ -352,11 +414,11 @@ namespace ProcessInfo
                 {
                     try
                     {
-                        listBox1.SelectedIndex = index;
-                        listBox1.TopIndex = topIndex;
+                        processesList.SelectedIndex = index;
+                        processesList.TopIndex = topIndex;
                     }
                     catch { }
-                    label2.Text = text;
+                    statusLabel.Text = text;
                     LockWindowUpdate(0);
                 }));
 
@@ -383,12 +445,12 @@ namespace ProcessInfo
                     sText = sText.Remove(sText.Length - 1, 1);
                 }
                 catch { }
-                label1.Text = "ProcessInfo" + (sText == "" ? "" : " - ") + sText;
+                titleLabel.Text = "ProcessInfo" + (sText == "" ? "" : " - ") + sText;
             }
             else if(e.KeyCode == Keys.Escape)
             {
                 sText = "";
-                label1.Text = "ProcessInfo";
+                titleLabel.Text = "ProcessInfo";
             }
             else{
                 string key = KeyCodeToUnicode(e.KeyCode).ToLower();
@@ -407,14 +469,14 @@ namespace ProcessInfo
                 {
                     return;
                 }
-                label1.Text = "ProcessInfo" + (sText == "" ? "" : " - ") + sText;
+                titleLabel.Text = "ProcessInfo" + (sText == "" ? "" : " - ") + sText;
                 
-                for (int i = 0; i < listBox1.Items.Count; i++)
+                for (int i = 0; i < processesList.Items.Count; i++)
                 {
-                    Process p = ((Info)listBox1.Items[i]).p;
+                    Process p = ((Info)processesList.Items[i]).p;
                     if (p.ProcessName.ToLower().StartsWith(sText) || p.MainWindowTitle.ToLower().StartsWith(sText))
                     {
-                        listBox1.SelectedIndex = i;
+                        processesList.SelectedIndex = i;
                         break;
                     }
                 }
@@ -425,13 +487,13 @@ namespace ProcessInfo
         {
             try
             {
-                ((Info)listBox1.Items[listBox1.SelectedIndex]).p.Kill();
+                ((Info)processesList.Items[processesList.SelectedIndex]).p.Kill();
                 Thread.Sleep(100);
                 UpdateList();
             }
             catch (Exception err)
             {
-                label2.Text = err.Message;
+                statusLabel.Text = err.Message;
             }
         }
 
@@ -444,19 +506,19 @@ namespace ProcessInfo
         {
             try
             {
-                Info i = (Info)listBox1.Items[listBox1.SelectedIndex];
+                Info i = (Info)processesList.Items[processesList.SelectedIndex];
 
-                label2.Text = i.FileName;
+                statusLabel.Text = i.FileName;
 
                 try
                 {
-                    label1.Text = "ProcessInfo - process " + i.p.Id.ToString();
+                    titleLabel.Text = "ProcessInfo - process " + i.p.Id.ToString();
                 }
                 catch { }
             }
             catch (Exception err)
             {
-                label2.Text = err.Message;
+                statusLabel.Text = err.Message;
             }
         }
 
@@ -486,7 +548,7 @@ namespace ProcessInfo
 
                     }
 
-                    contextMenuStrip1.Items[0].Text =((Info)listBox1.Items[listBox1.SelectedIndex]).p.ProcessName;
+                    contextMenuStrip1.Items[0].Text =((Info)processesList.Items[processesList.SelectedIndex]).p.ProcessName;
                     contextMenuStrip1.Show(Cursor.Position);
                 }
                 catch { }
@@ -513,7 +575,7 @@ namespace ProcessInfo
 
         private void changeWindowNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process p = ((Info)listBox1.Items[listBox1.SelectedIndex]).p;
+            Process p = ((Info)processesList.Items[processesList.SelectedIndex]).p;
             TBox tb = new TBox();
             tb.textBox1.Text = p.MainWindowTitle;
 
@@ -567,31 +629,31 @@ namespace ProcessInfo
 
         private void suspendToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SuspendProcess(((Info)listBox1.Items[listBox1.SelectedIndex]).p);
+            SuspendProcess(((Info)processesList.Items[processesList.SelectedIndex]).p);
         }
 
         private void resumeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ResumeProcess(((Info)listBox1.Items[listBox1.SelectedIndex]).p);
+            ResumeProcess(((Info)processesList.Items[processesList.SelectedIndex]).p);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ProcessThreadsView pv = new ProcessThreadsView();
-            pv.p = ((Info)listBox1.Items[listBox1.SelectedIndex]).p;
+            pv.p = ((Info)processesList.Items[processesList.SelectedIndex]).p;
             pv.ShowDialog();
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             ProcessModulesView pv = new ProcessModulesView();
-            pv.p = ((Info)listBox1.Items[listBox1.SelectedIndex]).p;
+            pv.p = ((Info)processesList.Items[processesList.SelectedIndex]).p;
             pv.ShowDialog();
         }
 
         private void kIllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IntPtr windowHandle = ((Info)listBox1.Items[listBox1.SelectedIndex]).p.MainWindowHandle;
+            IntPtr windowHandle = ((Info)processesList.Items[processesList.SelectedIndex]).p.MainWindowHandle;
 
             if (windowHandle != IntPtr.Zero)
             {
@@ -606,12 +668,12 @@ namespace ProcessInfo
 
         private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index >= listBox1.Items.Count || e.Index <= -1)
+            if (e.Index >= processesList.Items.Count || e.Index <= -1)
             {
                 return;
             }
 
-            Info item = (Info)listBox1.Items[e.Index];
+            Info item = (Info)processesList.Items[e.Index];
 
             if (item == null)
             {
@@ -624,7 +686,7 @@ namespace ProcessInfo
             }
             else
             {
-                e.Graphics.FillRectangle(new SolidBrush(listBox1.BackColor), e.Bounds);
+                e.Graphics.FillRectangle(new SolidBrush(processesList.BackColor), e.Bounds);
             }
 
             string text = "?";
@@ -641,22 +703,22 @@ namespace ProcessInfo
 
             e.Graphics.DrawString(
                     item.FormattedPID,
-                    listBox1.Font,
-                    new SolidBrush(listBox1.ForeColor),
+                    processesList.Font,
+                    new SolidBrush(processesList.ForeColor),
                     new PointF(20 + e.Bounds.Height, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
                 );
 
             e.Graphics.DrawString(
                     item.FormattedName,
-                    listBox1.Font,
-                    new SolidBrush(listBox1.ForeColor),
+                    processesList.Font,
+                    new SolidBrush(processesList.ForeColor),
                     new PointF(121, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
                 );
 
             e.Graphics.DrawString(
                     item.p.MainWindowTitle,
-                    listBox1.Font,
-                    new SolidBrush(listBox1.ForeColor),
+                    processesList.Font,
+                    new SolidBrush(processesList.ForeColor),
                     new PointF(352, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
                 );
 
@@ -727,6 +789,134 @@ namespace ProcessInfo
         private void hideButton_MouseUp(object sender, MouseEventArgs e)
         {
             hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide_hover;
+        }
+
+        private void injectDLLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dllDialog = new OpenFileDialog();
+            dllDialog.Filter = "*.dll|*.dll";
+            if(dllDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = dllDialog.FileName;
+                Process p = ((Info)processesList.Items[processesList.SelectedIndex]).p;
+                string text = statusLabel.Text;
+                new Thread(() => Inject(path, p, text)).Start();
+            }
+        }
+
+        void Inject(string path, Process process, string text)
+        {
+            string baseText = "injecting " + Path.GetFileName(path) + "... ";
+
+            IntPtr hProcess = OpenProcess(0x1F0FF, 1, process.Id);
+
+            if (hProcess == null)
+            {
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = baseText + "OpenProcess failed!";
+                }));
+
+                Thread.Sleep(1000);
+
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = text;
+                }));
+
+                return;
+            }
+
+            uint WriteLen = (uint)(path.Length + 1);
+
+            IntPtr AllocMem = VirtualAllocEx(hProcess, (IntPtr)null, WriteLen, 0x1000, 0x40);
+
+            IntPtr bytesout;
+
+            WriteProcessMemory(hProcess, AllocMem, path, (UIntPtr)WriteLen, out bytesout);
+
+            UIntPtr Injector = (UIntPtr)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
+
+            if (Injector == null)
+            {
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = baseText + "injector error!";
+                }));
+
+                Thread.Sleep(1000);
+
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = text;
+                }));
+
+                return;
+            }
+
+            IntPtr hThread = (IntPtr)CreateRemoteThread(hProcess, (IntPtr)null, 0, Injector, AllocMem, 0, out bytesout);
+
+            if (hThread == null)
+            {
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = baseText + "CreateRemoteThread error!";
+                }));
+
+                Thread.Sleep(1000);
+
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = text;
+                }));
+
+                return;
+            }
+
+            int result = WaitForSingleObject(hThread, 10 * 1000);
+
+            if (result == 0x00000080L || result == 0x00000102L || result == 0xFFFFFFFF)
+            {
+                if (hThread != null)
+                {
+                    CloseHandle(hThread);
+                }
+
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = baseText + "CreateRemoteThread error!";
+                }));
+
+                Thread.Sleep(1000);
+
+                statusLabel.Invoke(new MethodInvoker(() =>
+                {
+                    statusLabel.Text = text;
+                }));
+
+                return;
+            }
+
+            Task.Delay(1000);
+
+            VirtualFreeEx(hProcess, AllocMem, (UIntPtr)0, 0x8000);
+
+            if (hThread != null)
+            {
+                CloseHandle(hThread);
+            }
+
+            statusLabel.Invoke(new MethodInvoker(() =>
+            {
+                statusLabel.Text = baseText + "done!";
+            }));
+
+            Thread.Sleep(1000);
+
+            statusLabel.Invoke(new MethodInvoker(() =>
+            {
+                statusLabel.Text = text;
+            }));
         }
     }
 

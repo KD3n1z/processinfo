@@ -22,7 +22,7 @@ namespace ProcessInfo
     }
     internal static class Program
     {
-        public static int build = 13;
+        public static int build = 14;
 
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
@@ -49,20 +49,13 @@ namespace ProcessInfo
 
         public static bool hidden = false;
 
-        [DllImport("user32.dll")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        [DllImport("user32.dll")]
-        static extern bool ShowWindow(IntPtr handle, int nCmdShow);
-
+        [STAThread]
         static void Main(string[] args)
         {
             foreach (Process p in Process.GetProcessesByName("ProcessInfo"))
             {
                 if (p.Id != Process.GetCurrentProcess().Id)
                 {
-                    /*SetForegroundWindow(p.MainWindowHandle);
-                    ShowWindow(p.MainWindowHandle, 9);*/
                     Thread.Sleep(1000);
                     return;
                 }

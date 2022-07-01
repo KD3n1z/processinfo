@@ -31,19 +31,21 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainF));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.prefsButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.hideButton = new System.Windows.Forms.PictureBox();
             this.closeButton = new System.Windows.Forms.PictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.processesList = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.kIllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.killToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.injectDLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeWindowNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.suspendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +69,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(78)))));
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.titleLabel);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -80,24 +82,24 @@
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
-            // label1
+            // titleLabel
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(55, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(598, 24);
-            this.label1.TabIndex = 1;
-            this.label1.Tag = "dark";
-            this.label1.Text = "ProcessInfo";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
-            this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            this.titleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.titleLabel.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.titleLabel.Location = new System.Drawing.Point(55, 0);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(598, 24);
+            this.titleLabel.TabIndex = 1;
+            this.titleLabel.Tag = "dark";
+            this.titleLabel.Text = "ProcessInfo";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.titleLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.titleLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.titleLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.prefsButton);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -107,18 +109,18 @@
             this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
-            // button3
+            // prefsButton
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(0, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(55, 24);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "···";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.openPrefs);
+            this.prefsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.prefsButton.FlatAppearance.BorderSize = 0;
+            this.prefsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.prefsButton.Location = new System.Drawing.Point(0, 0);
+            this.prefsButton.Name = "prefsButton";
+            this.prefsButton.Size = new System.Drawing.Size(55, 24);
+            this.prefsButton.TabIndex = 0;
+            this.prefsButton.Text = "···";
+            this.prefsButton.UseVisualStyleBackColor = true;
+            this.prefsButton.Click += new System.EventHandler(this.openPrefs);
             // 
             // panel4
             // 
@@ -163,31 +165,31 @@
             this.closeButton.MouseLeave += new System.EventHandler(this.closeButton_MouseLeave);
             this.closeButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.closeButton_MouseUp);
             // 
-            // listBox1
+            // processesList
             // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(93)))));
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.listBox1.Font = new System.Drawing.Font("Consolas", 13F);
-            this.listBox1.ForeColor = System.Drawing.SystemColors.Window;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 22;
-            this.listBox1.Location = new System.Drawing.Point(0, 24);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(708, 352);
-            this.listBox1.TabIndex = 1;
-            this.listBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick_1);
-            this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            this.listBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyDown);
-            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
-            this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
+            this.processesList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(93)))));
+            this.processesList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.processesList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.processesList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.processesList.Font = new System.Drawing.Font("Consolas", 13F);
+            this.processesList.ForeColor = System.Drawing.SystemColors.Window;
+            this.processesList.FormattingEnabled = true;
+            this.processesList.ItemHeight = 22;
+            this.processesList.Location = new System.Drawing.Point(0, 24);
+            this.processesList.Name = "processesList";
+            this.processesList.Size = new System.Drawing.Size(708, 352);
+            this.processesList.TabIndex = 1;
+            this.processesList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick_1);
+            this.processesList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
+            this.processesList.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.processesList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyDown);
+            this.processesList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            this.processesList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(78)))));
-            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.statusLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 376);
             this.panel2.Name = "panel2";
@@ -195,25 +197,27 @@
             this.panel2.TabIndex = 2;
             this.panel2.Tag = "dark";
             // 
-            // label2
+            // statusLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(12, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Tag = "dark";
-            this.label2.Text = "...";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.statusLabel.Location = new System.Drawing.Point(12, 3);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(28, 15);
+            this.statusLabel.TabIndex = 0;
+            this.statusLabel.Tag = "dark";
+            this.statusLabel.Text = "...";
+            this.statusLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kIllToolStripMenuItem,
-            this.toolStripMenuItem3,
+            this.toolStripMenuItem6,
             this.killToolStripMenuItem1,
+            this.toolStripMenuItem3,
+            this.injectDLLToolStripMenuItem,
             this.changeWindowNameToolStripMenuItem,
             this.toolStripMenuItem4,
             this.suspendToolStripMenuItem,
@@ -223,7 +227,7 @@
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 176);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 204);
             // 
             // kIllToolStripMenuItem
             // 
@@ -235,10 +239,10 @@
             this.kIllToolStripMenuItem.Text = "-- pname --";
             this.kIllToolStripMenuItem.Click += new System.EventHandler(this.kIllToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem3
+            // toolStripMenuItem6
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 6);
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(194, 6);
             // 
             // killToolStripMenuItem1
             // 
@@ -247,6 +251,19 @@
             this.killToolStripMenuItem1.Size = new System.Drawing.Size(197, 22);
             this.killToolStripMenuItem1.Text = "Kill";
             this.killToolStripMenuItem1.Click += new System.EventHandler(this.killToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 6);
+            // 
+            // injectDLLToolStripMenuItem
+            // 
+            this.injectDLLToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
+            this.injectDLLToolStripMenuItem.Name = "injectDLLToolStripMenuItem";
+            this.injectDLLToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.injectDLLToolStripMenuItem.Text = "Inject .DLL";
+            this.injectDLLToolStripMenuItem.Click += new System.EventHandler(this.injectDLLToolStripMenuItem_Click);
             // 
             // changeWindowNameToolStripMenuItem
             // 
@@ -327,7 +344,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(708, 398);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.processesList);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -356,10 +373,10 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label titleLabel;
+        public System.Windows.Forms.ListBox processesList;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem kIllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem killToolStripMenuItem1;
@@ -372,13 +389,15 @@
         private System.Windows.Forms.ToolStripMenuItem resumeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem suspendToolStripMenuItem;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button prefsButton;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox closeButton;
         private System.Windows.Forms.PictureBox hideButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem injectDLLToolStripMenuItem;
     }
 }
 
