@@ -687,6 +687,8 @@ namespace ProcessInfo
                 return;
             }
 
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
                 e.Graphics.FillRectangle(new SolidBrush(Program.SelColor), e.Bounds);
@@ -703,9 +705,9 @@ namespace ProcessInfo
             }
             SizeF stringSize = e.Graphics.MeasureString(text, Font);
 
-            e.Graphics.DrawIcon(
-                item.Icon,
-                new Rectangle(16 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2)
+            e.Graphics.DrawImage(
+                    item._Icon,
+                    new Rectangle(16 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2)
                 );
 
             e.Graphics.DrawString(
@@ -731,14 +733,14 @@ namespace ProcessInfo
 
 
             e.Graphics.DrawRectangle(
-                new Pen(new SolidBrush(Program.DarkBackColor)),
-                new Rectangle(new Point(108, e.Bounds.Y), new Size(1, e.Bounds.Height))
+                    new Pen(new SolidBrush(Program.DarkBackColor)),
+                    new Rectangle(new Point(108, e.Bounds.Y), new Size(1, e.Bounds.Height))
                 );
 
 
             e.Graphics.DrawRectangle(
-                new Pen(new SolidBrush(Program.DarkBackColor)),
-                new Rectangle(new Point(342, e.Bounds.Y), new Size(1, e.Bounds.Height))
+                    new Pen(new SolidBrush(Program.DarkBackColor)),
+                    new Rectangle(new Point(342, e.Bounds.Y), new Size(1, e.Bounds.Height))
                 );
         }
 
@@ -931,8 +933,8 @@ namespace ProcessInfo
     {
         public Process p;
 
-        Icon icon = null;
-        public Icon Icon
+        Image icon = null;
+        public Image _Icon
         {
             get
             {
@@ -948,11 +950,11 @@ namespace ProcessInfo
         {
             try
             {
-                icon = new Icon(Icon.ExtractAssociatedIcon(FileName), 16, 16);
+                icon = new Icon(Icon.ExtractAssociatedIcon(FileName), 16, 16).ToBitmap();
             }
             catch
             {
-                icon = global::ProcessInfo.Properties.Resources.error;
+                icon = global::ProcessInfo.Properties.Resources.error.ToBitmap();
             }
         }
 
