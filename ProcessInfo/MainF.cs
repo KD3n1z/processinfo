@@ -175,7 +175,10 @@ namespace ProcessInfo
 
             new Thread(ShortcutOpen).Start();
 
-            new Thread(AutoUpdate).Start();
+            Task.Factory.StartNew(() =>
+            {
+                AutoUpdate();
+            });
 
             LoadTheme();
 
@@ -347,6 +350,10 @@ namespace ProcessInfo
                 if ((string)c.Tag == "dark")
                 {
                     c.BackColor = Program.DarkBackColor;
+                }
+                else if ((string)c.Tag == "sel")
+                {
+                    c.BackColor = Program.SelColor;
                 }
                 else
                 {

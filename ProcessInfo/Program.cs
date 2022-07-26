@@ -22,17 +22,17 @@ namespace ProcessInfo
     }
     internal static class Program
     {
-        public static int build = 14;
+        public static int build = 15;
 
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
         public static UpdateBehaviour UpdateAction = UpdateBehaviour.Ask;
-        public static Color BackColor = Color.FromArgb(47, 47, 93);
-        public static Color DarkBackColor = Color.FromArgb(39, 39, 78);
-        public static Color ForeColor = Color.White;
-        public static Color SelColor = Color.Blue;
+        public static Color BackColor = Color.FromArgb(45, 42, 46);
+        public static Color DarkBackColor = Color.FromArgb(34, 31, 34);
+        public static Color ForeColor = Color.FromArgb(235, 219, 178);
+        public static Color SelColor = Color.FromArgb(100, 123, 100);
         public static int Radius = 15;
-        public static string ThemeFile = "venus";
+        public static string ThemeFile = "gourd";
         public static bool Shadow = false;
         public static int AutoUpdateRate = 10;
 

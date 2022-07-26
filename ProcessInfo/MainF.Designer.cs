@@ -56,6 +56,8 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -175,7 +177,7 @@
             this.processesList.ForeColor = System.Drawing.SystemColors.Window;
             this.processesList.FormattingEnabled = true;
             this.processesList.ItemHeight = 22;
-            this.processesList.Location = new System.Drawing.Point(0, 24);
+            this.processesList.Location = new System.Drawing.Point(0, 25);
             this.processesList.Name = "processesList";
             this.processesList.Size = new System.Drawing.Size(708, 352);
             this.processesList.TabIndex = 1;
@@ -191,7 +193,7 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(78)))));
             this.panel2.Controls.Add(this.statusLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 376);
+            this.panel2.Location = new System.Drawing.Point(0, 378);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(708, 22);
             this.panel2.TabIndex = 2;
@@ -338,13 +340,33 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // panel5
+            // 
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 24);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(708, 1);
+            this.panel5.TabIndex = 3;
+            this.panel5.Tag = "sel";
+            // 
+            // panel6
+            // 
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 377);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(708, 1);
+            this.panel6.TabIndex = 4;
+            this.panel6.Tag = "sel";
+            // 
             // MainF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(708, 398);
+            this.ClientSize = new System.Drawing.Size(708, 400);
             this.Controls.Add(this.processesList);
+            this.Controls.Add(this.panel6);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -398,6 +420,8 @@
         private System.Windows.Forms.PictureBox hideButton;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem injectDLLToolStripMenuItem;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
     }
 }
 
