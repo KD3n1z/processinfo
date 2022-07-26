@@ -54,7 +54,7 @@ namespace ProcessInfo
                     File.Delete(dPath);
                 }
                 catch { }
-                Program.ThemeFile = "venus";
+                Program.ThemeFile = "gourd";
             }
 
             foreach(string f in Directory.GetFiles(themes).OrderByDescending(t => Path.GetFileNameWithoutExtension(t).StartsWith("def") || Path.GetFileNameWithoutExtension(t).StartsWith("light")))

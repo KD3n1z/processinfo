@@ -496,7 +496,7 @@ namespace ProcessInfo
             {
                 ((Info)processesList.Items[processesList.SelectedIndex]).p.Kill();
                 Thread.Sleep(100);
-                UpdateList();
+                new Thread(UpdateList).Start();
             }
             catch (Exception err)
             {
