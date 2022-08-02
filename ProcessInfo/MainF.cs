@@ -355,6 +355,10 @@ namespace ProcessInfo
                 {
                     c.BackColor = Program.SelColor;
                 }
+                else if ((string)c.Tag == "lines")
+                {
+                    c.BackColor = Program.LinesColor;
+                }
                 else
                 {
                     c.BackColor = Program.BackColor;
@@ -733,13 +737,13 @@ namespace ProcessInfo
 
 
             e.Graphics.DrawRectangle(
-                    new Pen(new SolidBrush(Program.DarkBackColor)),
+                    new Pen(new SolidBrush(Program.LinesColor)),
                     new Rectangle(new Point(108, e.Bounds.Y), new Size(1, e.Bounds.Height))
                 );
 
 
             e.Graphics.DrawRectangle(
-                    new Pen(new SolidBrush(Program.DarkBackColor)),
+                    new Pen(new SolidBrush(Program.LinesColor)),
                     new Rectangle(new Point(342, e.Bounds.Y), new Size(1, e.Bounds.Height))
                 );
         }

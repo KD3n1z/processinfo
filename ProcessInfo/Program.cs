@@ -27,13 +27,19 @@ namespace ProcessInfo
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
         public static UpdateBehaviour UpdateAction = UpdateBehaviour.Ask;
+
+        // THEME SETTINGS (colors)
+        public static string ThemeFile = "gourd";
         public static Color BackColor = Color.FromArgb(45, 42, 46);
         public static Color DarkBackColor = Color.FromArgb(34, 31, 34);
         public static Color ForeColor = Color.FromArgb(235, 219, 178);
         public static Color SelColor = Color.FromArgb(100, 123, 100);
+        public static Color LinesColor = Color.FromArgb(34, 31, 34);
+
+        // THEME SETTINGS (individual)
         public static int Radius = 15;
-        public static string ThemeFile = "gourd";
         public static bool Shadow = false;
+
         public static int AutoUpdateRate = 10;
 
         public static MainF mainForm;

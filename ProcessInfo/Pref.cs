@@ -70,6 +70,7 @@ namespace ProcessInfo
             backCB.BackColor = Program.BackColor;
             dbackCB.BackColor = Program.DarkBackColor;
             selCB.BackColor = Program.SelColor;
+            linesCB.BackColor = Program.LinesColor;
             label1.Text += Program.build;
             checkBox2.Checked = Program.Shadow;
 
@@ -138,6 +139,9 @@ namespace ProcessInfo
                     break;
                 case "sel":
                     Program.SelColor = b.BackColor;
+                    break;
+                case "lines":
+                    Program.LinesColor = b.BackColor;
                     break;
                 default:
                     break;
@@ -253,13 +257,20 @@ namespace ProcessInfo
 
         void SaveTheme()
         {
-            File.WriteAllText(Path.Combine(themes, comboBox1.Text + ".pit"),
-                "custom\n"
-                + textCB.BackColor.ToArgb().ToString() + "\n"
-                + backCB.BackColor.ToArgb().ToString() + "\n"
-                + dbackCB.BackColor.ToArgb().ToString() + "\n"
-                + selCB.BackColor.ToArgb().ToString() + "\n"
-                );
+            try
+            {
+                File.WriteAllText(Path.Combine(themes, comboBox1.Text + ".pit"),
+                    "custom\n"
+                    + textCB.BackColor.ToArgb().ToString() + "\n"
+                    + backCB.BackColor.ToArgb().ToString() + "\n"
+                    + dbackCB.BackColor.ToArgb().ToString() + "\n"
+                    + selCB.BackColor.ToArgb().ToString() + "\n"
+                    );
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, "ProcessInfo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -283,6 +294,14 @@ namespace ProcessInfo
                 selCB.BackColor = Program.SelColor = Color.FromArgb(int.Parse(vals[4]));
             }
             catch { }
+            try
+            {
+                linesCB.BackColor = Program.LinesColor = Color.FromArgb(int.Parse(vals[5]));
+            }
+            catch
+            {
+                linesCB.BackColor = Program.LinesColor = Program.DarkBackColor;
+            }
 
 
             Program.mainForm.LoadTheme();

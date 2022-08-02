@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pref));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.linesCB = new System.Windows.Forms.Button();
             this.selCB = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -68,6 +70,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.linesCB);
             this.groupBox1.Controls.Add(this.selCB);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.comboBox1);
@@ -83,6 +86,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Theme";
             this.groupBox1.BackColorChanged += new System.EventHandler(this.changeFG);
+            // 
+            // linesCB
+            // 
+            this.linesCB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.linesCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.linesCB.ForeColor = System.Drawing.Color.White;
+            this.linesCB.Location = new System.Drawing.Point(6, 105);
+            this.linesCB.Name = "linesCB";
+            this.linesCB.Size = new System.Drawing.Size(312, 26);
+            this.linesCB.TabIndex = 8;
+            this.linesCB.Tag = "lines";
+            this.linesCB.Text = "Lines";
+            this.linesCB.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.linesCB.UseVisualStyleBackColor = false;
+            this.linesCB.BackColorChanged += new System.EventHandler(this.changeFG);
+            this.linesCB.Click += new System.EventHandler(this.changeColor);
             // 
             // selCB
             // 
@@ -102,9 +121,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(6, 171);
+            this.button7.Location = new System.Drawing.Point(221, 170);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(312, 24);
+            this.button7.Size = new System.Drawing.Size(97, 24);
             this.button7.TabIndex = 4;
             this.button7.Text = "Save";
             this.button7.UseVisualStyleBackColor = true;
@@ -113,9 +132,9 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 144);
+            this.comboBox1.Location = new System.Drawing.Point(6, 172);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(312, 21);
+            this.comboBox1.Size = new System.Drawing.Size(209, 21);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -169,7 +188,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(82, 108);
+            this.trackBar1.Location = new System.Drawing.Point(82, 137);
             this.trackBar1.Maximum = 15;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(236, 45);
@@ -179,7 +198,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 115);
+            this.label6.Location = new System.Drawing.Point(7, 145);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 6;
@@ -344,7 +363,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::ProcessInfo.Properties.Resources.pinotify.ToBitmap();
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(12, 16);
             this.pictureBox1.Name = "pictureBox1";
@@ -476,5 +495,6 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button linesCB;
     }
 }
