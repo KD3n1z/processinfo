@@ -77,7 +77,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(708, 24);
+            this.panel1.Size = new System.Drawing.Size(708, 27);
             this.panel1.TabIndex = 0;
             this.panel1.Tag = "dark";
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -90,7 +90,7 @@
             this.titleLabel.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.titleLabel.Location = new System.Drawing.Point(55, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(598, 24);
+            this.titleLabel.Size = new System.Drawing.Size(598, 27);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Tag = "dark";
             this.titleLabel.Text = "ProcessInfo";
@@ -105,7 +105,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(55, 24);
+            this.panel3.Size = new System.Drawing.Size(55, 27);
             this.panel3.TabIndex = 4;
             this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -118,7 +118,7 @@
             this.prefsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.prefsButton.Location = new System.Drawing.Point(0, 0);
             this.prefsButton.Name = "prefsButton";
-            this.prefsButton.Size = new System.Drawing.Size(55, 24);
+            this.prefsButton.Size = new System.Drawing.Size(55, 27);
             this.prefsButton.TabIndex = 0;
             this.prefsButton.Text = "···";
             this.prefsButton.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(653, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(55, 24);
+            this.panel4.Size = new System.Drawing.Size(55, 27);
             this.panel4.TabIndex = 5;
             this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -141,7 +141,7 @@
             // 
             this.hideButton.BackgroundImage = global::ProcessInfo.Properties.Resources.mac_hide;
             this.hideButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.hideButton.Location = new System.Drawing.Point(19, 7);
+            this.hideButton.Location = new System.Drawing.Point(19, 8);
             this.hideButton.Name = "hideButton";
             this.hideButton.Size = new System.Drawing.Size(11, 11);
             this.hideButton.TabIndex = 1;
@@ -156,7 +156,7 @@
             // 
             this.closeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("closeButton.BackgroundImage")));
             this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.closeButton.Location = new System.Drawing.Point(38, 7);
+            this.closeButton.Location = new System.Drawing.Point(38, 8);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(11, 11);
             this.closeButton.TabIndex = 0;
@@ -177,9 +177,9 @@
             this.processesList.ForeColor = System.Drawing.SystemColors.Window;
             this.processesList.FormattingEnabled = true;
             this.processesList.ItemHeight = 22;
-            this.processesList.Location = new System.Drawing.Point(0, 25);
+            this.processesList.Location = new System.Drawing.Point(0, 28);
             this.processesList.Name = "processesList";
-            this.processesList.Size = new System.Drawing.Size(708, 352);
+            this.processesList.Size = new System.Drawing.Size(708, 330);
             this.processesList.TabIndex = 1;
             this.processesList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick_1);
             this.processesList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox1_DrawItem);
@@ -193,9 +193,9 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(78)))));
             this.panel2.Controls.Add(this.statusLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 378);
+            this.panel2.Location = new System.Drawing.Point(0, 359);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(708, 22);
+            this.panel2.Size = new System.Drawing.Size(708, 27);
             this.panel2.TabIndex = 2;
             this.panel2.Tag = "dark";
             // 
@@ -203,7 +203,7 @@
             // 
             this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.statusLabel.Location = new System.Drawing.Point(12, 3);
+            this.statusLabel.Location = new System.Drawing.Point(12, 5);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(28, 15);
             this.statusLabel.TabIndex = 0;
@@ -343,7 +343,7 @@
             // panel5
             // 
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 24);
+            this.panel5.Location = new System.Drawing.Point(0, 27);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(708, 1);
             this.panel5.TabIndex = 3;
@@ -352,7 +352,7 @@
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 377);
+            this.panel6.Location = new System.Drawing.Point(0, 358);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(708, 1);
             this.panel6.TabIndex = 4;
@@ -363,7 +363,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(708, 400);
+            this.ClientSize = new System.Drawing.Size(708, 386);
             this.Controls.Add(this.processesList);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
