@@ -22,7 +22,13 @@ namespace ProcessInfo
     }
     internal static class Program
     {
-        public static int build = 15;
+        public static int build
+        {
+            get
+            {
+                return System.Reflection.Assembly.GetEntryAssembly().GetName().Version.Build;
+            }
+        }
 
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
