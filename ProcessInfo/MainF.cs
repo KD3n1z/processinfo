@@ -318,7 +318,7 @@ namespace ProcessInfo
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            HideWindow();
+            Close();
         }
 
         private void hideButton_Click(object sender, EventArgs e)
@@ -635,6 +635,7 @@ namespace ProcessInfo
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            running = false;
             Close();
         }
 
@@ -674,7 +675,12 @@ namespace ProcessInfo
 
         private void MainF_FormClosing(object sender, FormClosingEventArgs e)
         {
-            running = false;
+            e.Cancel = !running;
+
+            if(running)
+            {
+                HideWindow();
+            }
         }
 
         private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
