@@ -15,7 +15,8 @@ namespace ProcessInfo
     {
        public bool restartRequired = false;
 
-        RegistryKey alReg;
+        RegistryKey autolaunchKey;
+        RegistryKey imagefileKey;
 
         string themes = Path.Combine(Program.generalPath, "themes");
         public Pref()
@@ -27,17 +28,33 @@ namespace ProcessInfo
         {
             try
             {
-                alReg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run", true);
+                autolaunchKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run", true);
             }
             catch { }
 
-            if(alReg != null)
+            try
             {
-                checkBox1.Checked = alReg.GetValue("ProcessInfo") != null;
+                imagefileKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options", true);
             }
-            else
+            catch { }
+
+            try
             {
-                checkBox1.Text = "start up as administrator";
+                RegistryKey subkey = imagefileKey.OpenSubKey("taskmgr.exe");
+                if(subkey != null)
+                {
+                    object val = subkey.GetValue("Debugger");
+                    if (val != null)
+                    {
+                        checkBox3.Checked = val.ToString() == "\"" + Process.GetCurrentProcess().MainModule.FileName + "\"";
+                    }
+                }
+            }
+            catch { }
+
+            if (autolaunchKey != null)
+            {
+                checkBox1.Checked = autolaunchKey.GetValue("ProcessInfo") != null;
             }
 
             if (!Directory.Exists(themes))
@@ -173,20 +190,35 @@ namespace ProcessInfo
             {
                 if (checkBox1.Checked)
                 {
-                    alReg.SetValue("ProcessInfo", "\"" + Process.GetCurrentProcess().MainModule.FileName + "\" -hidden");
+                    autolaunchKey.SetValue("ProcessInfo", "\"" + Process.GetCurrentProcess().MainModule.FileName + "\" -hidden");
                 }
-                else if (alReg.GetValue("ProcessInfo") != null)
+                else if (autolaunchKey.GetValue("ProcessInfo") != null)
                 {
-                    alReg.DeleteValue("ProcessInfo");
+                    autolaunchKey.DeleteValue("ProcessInfo");
                 }
             }
             catch { }
 
-        }
+            try
+            {
+                RegistryKey subkey = imagefileKey.OpenSubKey("taskmgr.exe", true);
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://kd3n1z.com/index.php?app=ProcessInfo");
+                if (subkey == null)
+                {
+                    subkey = imagefileKey.CreateSubKey("taskmgr.exe", true);
+                }
+
+                if (checkBox3.Checked)
+                {
+                    subkey.SetValue("Debugger", "\"" + Process.GetCurrentProcess().MainModule.FileName + "\"");
+                }
+                else if (autolaunchKey.GetValue("ProcessInfo") != null)
+                {
+                    subkey.DeleteValue("Debugger");
+                }
+            }
+            catch { }
+
         }
 
         private void button5_KeyDown(object sender, KeyEventArgs e)
@@ -346,6 +378,11 @@ namespace ProcessInfo
             label8.Text = "Auto-Update rate: " + val;
 
             Program.AutoUpdateRate = trackBar2.Value;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://kd3n1z.com/index.php?app=ProcessInfo");
         }
     }
 }

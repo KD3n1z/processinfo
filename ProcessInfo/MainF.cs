@@ -675,7 +675,7 @@ namespace ProcessInfo
 
         private void MainF_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = !running;
+            e.Cancel = running;
 
             if(running)
             {
