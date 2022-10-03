@@ -162,9 +162,17 @@ namespace ProcessInfo
 
         #endregion
 
+
+        SolidBrush foreBrush;
+        SolidBrush selBrush;
+        SolidBrush linesBrush;
+        SolidBrush backBrush;
+
         public MainF()
         {
             InitializeComponent();
+
+            LoadTheme();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -179,8 +187,6 @@ namespace ProcessInfo
             {
                 AutoUpdate();
             });
-
-            LoadTheme();
 
             UpdateList();
 
@@ -344,6 +350,11 @@ namespace ProcessInfo
 
         public void LoadTheme()
         {
+            foreBrush = new SolidBrush(Program.ForeColor);
+            backBrush = new SolidBrush(Program.BackColor);
+            linesBrush = new SolidBrush(Program.LinesColor);
+            selBrush = new SolidBrush(Program.SelColor);
+
             foreach (Control c in Controls)
             {
                 c.ForeColor = Program.ForeColor;
@@ -683,6 +694,7 @@ namespace ProcessInfo
             }
         }
 
+
         private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index >= processesList.Items.Count || e.Index <= -1)
@@ -699,13 +711,15 @@ namespace ProcessInfo
 
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
+
+
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Program.SelColor), e.Bounds);
+                e.Graphics.FillRectangle(selBrush, e.Bounds);
             }
             else
             {
-                e.Graphics.FillRectangle(new SolidBrush(processesList.BackColor), e.Bounds);
+                e.Graphics.FillRectangle(backBrush, e.Bounds);
             }
 
             string text = "?";
@@ -715,6 +729,22 @@ namespace ProcessInfo
             }
             SizeF stringSize = e.Graphics.MeasureString(text, Font);
 
+            e.Graphics.FillRectangle(
+                    linesBrush,
+                    new Rectangle(new Point(108, e.Bounds.Y), new Size(1, e.Bounds.Height))
+                );
+
+
+            e.Graphics.FillRectangle(
+                    linesBrush,
+                    new Rectangle(new Point(342, e.Bounds.Y), new Size(1, e.Bounds.Height))
+                );
+
+            /*e.Graphics.FillRectangle(
+                    linesBrush,
+                    new Rectangle(new Point(622, e.Bounds.Y), new Size(1, e.Bounds.Height))
+                );*/
+
             e.Graphics.DrawImage(
                     item._Icon,
                     new Rectangle(16 + e.Bounds.X, 1 + e.Bounds.Y, e.Bounds.Height - 2, e.Bounds.Height - 2)
@@ -723,34 +753,29 @@ namespace ProcessInfo
             e.Graphics.DrawString(
                     item.FormattedPID,
                     processesList.Font,
-                    new SolidBrush(processesList.ForeColor),
+                    foreBrush,
                     new PointF(20 + e.Bounds.Height, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
                 );
 
             e.Graphics.DrawString(
                     item.FormattedName,
                     processesList.Font,
-                    new SolidBrush(processesList.ForeColor),
+                    foreBrush,
                     new PointF(121, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
                 );
 
-            e.Graphics.DrawString(
-                    item.p.MainWindowTitle,
+            /*e.Graphics.DrawString(
+                    (item.p.WorkingSet64 / 1024 / 1024).ToString(),
                     processesList.Font,
-                    new SolidBrush(processesList.ForeColor),
+                    foreBrush,
+                    new PointF(640, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
+                );*/
+
+            e.Graphics.DrawString(
+                    item.FormattedTitle,
+                    processesList.Font,
+                    foreBrush,
                     new PointF(352, 2 + e.Bounds.Y + (e.Bounds.Height - stringSize.Height) / 2)
-                );
-
-
-            e.Graphics.DrawRectangle(
-                    new Pen(new SolidBrush(Program.LinesColor)),
-                    new Rectangle(new Point(108, e.Bounds.Y), new Size(1, e.Bounds.Height))
-                );
-
-
-            e.Graphics.DrawRectangle(
-                    new Pen(new SolidBrush(Program.LinesColor)),
-                    new Rectangle(new Point(342, e.Bounds.Y), new Size(1, e.Bounds.Height))
                 );
         }
 
@@ -937,6 +962,11 @@ namespace ProcessInfo
                 statusLabel.Text = text;
             }));
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            processesList.Update();
+        }
     }
 
     public class Info
@@ -1001,6 +1031,19 @@ namespace ProcessInfo
                     name = name.Substring(0, 17) + "...";
                 }
                 return name + new string(' ', 20 - name.Length);
+            }
+        }
+
+        public string FormattedTitle
+        {
+            get
+            {
+                string title = p.MainWindowTitle;
+                if (title.Length > 33)
+                {
+                    title = title.Substring(0, 30) + "...";
+                }
+                return title;
             }
         }
 
