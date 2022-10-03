@@ -421,9 +421,19 @@ namespace ProcessInfo
 
                 foreach (Process p in processes.OrderBy(p => p.ProcessName).ThenBy(p => string.IsNullOrWhiteSpace(p.MainWindowTitle)).ThenBy(p => p.Id))
                 {
+                    DateTime startDT = DateTime.Now;
+
                     processNum++;
                     Info i = new Info(p);
-                    i.CacheIcon();
+                    if (!Program.BlackListEnabled || !Program.BlackList.Contains(p.ProcessName))
+                    {
+                        bool cachedIcon = i.CacheIcon();
+
+                        if (DateTime.Now.Subtract(startDT).TotalMilliseconds > 500)
+                        {
+                            Program.BlackList.Add(p.ProcessName);
+                        }
+                    }
 
                     Invoke(new MethodInvoker(() =>
                     {
@@ -431,6 +441,8 @@ namespace ProcessInfo
                         statusLabel.Text = "updating... " + processNum + "/" + processes.Length;
                     }));
                 }
+
+                Program.SaveBlackList();
 
                 Invoke(new MethodInvoker(() =>
                 {
@@ -986,16 +998,23 @@ namespace ProcessInfo
             }
         }
 
-        public void CacheIcon()
+        public bool CacheIcon()
         {
             try
             {
+                if (Program.BlackListEnabled && Program.BlackList.Contains(p.ProcessName))
+                {
+                    icon = global::ProcessInfo.Properties.Resources.error.ToBitmap();
+                    return true;
+                }
                 icon = new Icon(Icon.ExtractAssociatedIcon(FileName), 16, 16).ToBitmap();
+                return true;
             }
             catch
             {
                 icon = global::ProcessInfo.Properties.Resources.error.ToBitmap();
             }
+            return false;
         }
 
         public string FileName
