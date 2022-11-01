@@ -45,6 +45,7 @@ namespace ProcessInfo
         public static Color ForeColor = Color.FromArgb(235, 219, 178);
         public static Color SelColor = Color.FromArgb(100, 123, 100);
         public static Color LinesColor = Color.FromArgb(34, 31, 34);
+        public static Color Lines2Color = Color.FromArgb(100, 123, 100);
 
         // THEME SETTINGS (individual)
         public static int Radius = 15;
@@ -192,6 +193,8 @@ namespace ProcessInfo
             settingsFile["darkBackColor"] = DarkBackColor.ToArgb().ToString();
             settingsFile["foreColor"] = ForeColor.ToArgb().ToString();
             settingsFile["selectionColor"] = SelColor.ToArgb().ToString();
+            settingsFile["linesColor"] = LinesColor.ToArgb().ToString();
+            settingsFile["lines2Color"] = Lines2Color.ToArgb().ToString();
             settingsFile["radius"] = Radius.ToString();
             settingsFile["update"] = ((int)UpdateAction).ToString();
             settingsFile["killKey"] = ((int)KillKey).ToString();
@@ -222,6 +225,8 @@ namespace ProcessInfo
                 DarkBackColor = Color.FromArgb(int.Parse(settingsFile["darkBackColor"]));
                 ForeColor = Color.FromArgb(int.Parse(settingsFile["foreColor"]));
                 SelColor = Color.FromArgb(int.Parse(settingsFile["selectionColor"]));
+                LinesColor = Color.FromArgb(int.Parse(settingsFile["linesColor"]));
+                Lines2Color = Color.FromArgb(int.Parse(settingsFile["lines2Color"]));
                 Radius = int.Parse(settingsFile["radius"]);
                 UpdateAction = (UpdateBehaviour)int.Parse(settingsFile["update"]);
                 KillKey = (Keys)int.Parse(settingsFile["killKey"]);
@@ -237,7 +242,7 @@ namespace ProcessInfo
         {
             if (BlackListEnabled)
             {
-                string str = "#disable\n# These processes will not be cached. Remove the \"#\" on first line to disable blacklist";
+                string str = "#disable\n# These processes will not be cached. Remove the \"#\" on first line to disable blacklist\n# ";
                 foreach (string pn in BlackList)
                 {
                     str += "\n" + pn;

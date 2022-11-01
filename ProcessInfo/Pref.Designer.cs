@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pref));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lines2CB = new System.Windows.Forms.Button();
             this.linesCB = new System.Windows.Forms.Button();
             this.selCB = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -70,6 +71,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lines2CB);
             this.groupBox1.Controls.Add(this.linesCB);
             this.groupBox1.Controls.Add(this.selCB);
             this.groupBox1.Controls.Add(this.button7);
@@ -87,14 +89,30 @@
             this.groupBox1.Text = "Theme";
             this.groupBox1.BackColorChanged += new System.EventHandler(this.changeFG);
             // 
+            // lines2CB
+            // 
+            this.lines2CB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
+            this.lines2CB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lines2CB.ForeColor = System.Drawing.Color.White;
+            this.lines2CB.Location = new System.Drawing.Point(159, 98);
+            this.lines2CB.Name = "lines2CB";
+            this.lines2CB.Size = new System.Drawing.Size(159, 33);
+            this.lines2CB.TabIndex = 9;
+            this.lines2CB.Tag = "lines2";
+            this.lines2CB.Text = "Top Lines";
+            this.lines2CB.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.lines2CB.UseVisualStyleBackColor = false;
+            this.lines2CB.BackColorChanged += new System.EventHandler(this.changeFG);
+            this.lines2CB.Click += new System.EventHandler(this.changeColor);
+            // 
             // linesCB
             // 
             this.linesCB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.linesCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.linesCB.ForeColor = System.Drawing.Color.White;
-            this.linesCB.Location = new System.Drawing.Point(6, 105);
+            this.linesCB.Location = new System.Drawing.Point(6, 97);
             this.linesCB.Name = "linesCB";
-            this.linesCB.Size = new System.Drawing.Size(312, 26);
+            this.linesCB.Size = new System.Drawing.Size(147, 33);
             this.linesCB.TabIndex = 8;
             this.linesCB.Tag = "lines";
             this.linesCB.Text = "Lines";
@@ -108,9 +126,9 @@
             this.selCB.BackColor = System.Drawing.Color.Blue;
             this.selCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.selCB.ForeColor = System.Drawing.Color.White;
-            this.selCB.Location = new System.Drawing.Point(6, 62);
+            this.selCB.Location = new System.Drawing.Point(6, 58);
             this.selCB.Name = "selCB";
-            this.selCB.Size = new System.Drawing.Size(147, 37);
+            this.selCB.Size = new System.Drawing.Size(147, 33);
             this.selCB.TabIndex = 7;
             this.selCB.Tag = "sel";
             this.selCB.Text = "Selection";
@@ -143,9 +161,9 @@
             this.dbackCB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(16)))), ((int)(((byte)(16)))));
             this.dbackCB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.dbackCB.ForeColor = System.Drawing.Color.White;
-            this.dbackCB.Location = new System.Drawing.Point(159, 62);
+            this.dbackCB.Location = new System.Drawing.Point(159, 58);
             this.dbackCB.Name = "dbackCB";
-            this.dbackCB.Size = new System.Drawing.Size(159, 37);
+            this.dbackCB.Size = new System.Drawing.Size(159, 33);
             this.dbackCB.TabIndex = 2;
             this.dbackCB.Tag = "dbg";
             this.dbackCB.Text = "Dark Background";
@@ -161,7 +179,7 @@
             this.backCB.ForeColor = System.Drawing.Color.White;
             this.backCB.Location = new System.Drawing.Point(159, 19);
             this.backCB.Name = "backCB";
-            this.backCB.Size = new System.Drawing.Size(159, 37);
+            this.backCB.Size = new System.Drawing.Size(159, 33);
             this.backCB.TabIndex = 1;
             this.backCB.Tag = "bg";
             this.backCB.Text = "Background";
@@ -177,7 +195,7 @@
             this.textCB.ForeColor = System.Drawing.Color.Black;
             this.textCB.Location = new System.Drawing.Point(6, 19);
             this.textCB.Name = "textCB";
-            this.textCB.Size = new System.Drawing.Size(147, 37);
+            this.textCB.Size = new System.Drawing.Size(147, 33);
             this.textCB.TabIndex = 0;
             this.textCB.Tag = "text";
             this.textCB.Text = "Text";
@@ -227,7 +245,7 @@
             this.groupBox2.Size = new System.Drawing.Size(324, 84);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Update";
+            this.groupBox2.Text = "Upgrading";
             // 
             // radioButton3
             // 
@@ -244,9 +262,9 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(127, 19);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(88, 17);
+            this.radioButton2.Size = new System.Drawing.Size(94, 17);
             this.radioButton2.TabIndex = 2;
-            this.radioButton2.Text = "never update";
+            this.radioButton2.Text = "never upgrade";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
@@ -254,9 +272,9 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(6, 19);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(93, 17);
+            this.radioButton1.Size = new System.Drawing.Size(99, 17);
             this.radioButton1.TabIndex = 1;
-            this.radioButton1.Text = "always update";
+            this.radioButton1.Text = "always upgrade";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // button4
@@ -495,5 +513,6 @@
         private System.Windows.Forms.Button linesCB;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button lines2CB;
     }
 }

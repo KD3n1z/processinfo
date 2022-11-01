@@ -370,6 +370,14 @@ namespace ProcessInfo
                 {
                     c.BackColor = Program.LinesColor;
                 }
+                else if ((string)c.Tag == "lines2")
+                {
+                    c.BackColor = Program.Lines2Color;
+                }
+                else if ((string)c.Tag == "fore")
+                {
+                    c.BackColor = Program.ForeColor;
+                }
                 else
                 {
                     c.BackColor = Program.BackColor;
@@ -429,7 +437,7 @@ namespace ProcessInfo
                     {
                         bool cachedIcon = i.CacheIcon();
 
-                        if (DateTime.Now.Subtract(startDT).TotalMilliseconds > 500)
+                        if (DateTime.Now.Subtract(startDT).TotalMilliseconds > 700)
                         {
                             Program.BlackList.Add(p.ProcessName);
                         }
@@ -486,7 +494,7 @@ namespace ProcessInfo
                 sText = "";
                 titleLabel.Text = "ProcessInfo";
             }
-            else{
+            else if(e.KeyCode != Keys.Enter){
                 string key = KeyCodeToUnicode(e.KeyCode).ToLower();
                 if (key.Length == 1 || e.KeyCode == Keys.Space)
                 {
@@ -529,6 +537,23 @@ namespace ProcessInfo
             {
                 statusLabel.Text = err.Message;
             }
+        }
+
+        void KillAll()
+        {
+            string name = ((Info)processesList.Items[processesList.SelectedIndex]).p.ProcessName;
+
+            foreach(Process p in Process.GetProcessesByName(name))
+            {
+                try
+                {
+                    p.Kill();
+                }
+                catch { }
+            }
+
+            Thread.Sleep(100);
+            new Thread(UpdateList).Start();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -978,6 +1003,11 @@ namespace ProcessInfo
         private void button1_Click(object sender, EventArgs e)
         {
             processesList.Update();
+        }
+
+        private void killAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KillAll();
         }
     }
 

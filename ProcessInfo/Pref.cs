@@ -88,6 +88,7 @@ namespace ProcessInfo
             dbackCB.BackColor = Program.DarkBackColor;
             selCB.BackColor = Program.SelColor;
             linesCB.BackColor = Program.LinesColor;
+            lines2CB.BackColor = Program.Lines2Color;
             label1.Text += Program.build;
             checkBox2.Checked = Program.Shadow;
 
@@ -159,6 +160,9 @@ namespace ProcessInfo
                     break;
                 case "lines":
                     Program.LinesColor = b.BackColor;
+                    break;
+                case "lines2":
+                    Program.Lines2Color = b.BackColor;
                     break;
                 default:
                     break;
@@ -297,6 +301,8 @@ namespace ProcessInfo
                     + backCB.BackColor.ToArgb().ToString() + "\n"
                     + dbackCB.BackColor.ToArgb().ToString() + "\n"
                     + selCB.BackColor.ToArgb().ToString() + "\n"
+                    + linesCB.BackColor.ToArgb().ToString() + "\n"
+                    + lines2CB.BackColor.ToArgb().ToString() + "\n"
                     );
             }
             catch(Exception e)
@@ -333,6 +339,14 @@ namespace ProcessInfo
             catch
             {
                 linesCB.BackColor = Program.LinesColor = Program.DarkBackColor;
+            }
+            try
+            {
+                lines2CB.BackColor = Program.Lines2Color = Color.FromArgb(int.Parse(vals[6]));
+            }
+            catch
+            {
+                lines2CB.BackColor = Program.Lines2Color = Program.SelColor;
             }
 
 
