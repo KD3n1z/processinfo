@@ -44,6 +44,7 @@
             this.kIllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.killToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.killAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.injectDLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeWindowNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.killAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -231,7 +231,7 @@
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 248);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 226);
             // 
             // kIllToolStripMenuItem
             // 
@@ -255,6 +255,14 @@
             this.killToolStripMenuItem1.Size = new System.Drawing.Size(197, 22);
             this.killToolStripMenuItem1.Text = "Kill";
             this.killToolStripMenuItem1.Click += new System.EventHandler(this.killToolStripMenuItem1_Click);
+            // 
+            // killAllToolStripMenuItem
+            // 
+            this.killAllToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
+            this.killAllToolStripMenuItem.Name = "killAllToolStripMenuItem";
+            this.killAllToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.killAllToolStripMenuItem.Text = "Kill All";
+            this.killAllToolStripMenuItem.Click += new System.EventHandler(this.killAllToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -359,14 +367,6 @@
             this.panel6.Size = new System.Drawing.Size(708, 1);
             this.panel6.TabIndex = 4;
             this.panel6.Tag = "lines2";
-            // 
-            // killAllToolStripMenuItem
-            // 
-            this.killAllToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Control;
-            this.killAllToolStripMenuItem.Name = "killAllToolStripMenuItem";
-            this.killAllToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.killAllToolStripMenuItem.Text = "Kill All";
-            this.killAllToolStripMenuItem.Click += new System.EventHandler(this.killAllToolStripMenuItem_Click);
             // 
             // MainF
             // 

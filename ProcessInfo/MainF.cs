@@ -433,15 +433,7 @@ namespace ProcessInfo
 
                     processNum++;
                     Info i = new Info(p);
-                    if (!Program.BlackListEnabled || !Program.BlackList.Contains(p.ProcessName))
-                    {
-                        bool cachedIcon = i.CacheIcon();
-
-                        if (DateTime.Now.Subtract(startDT).TotalMilliseconds > 700)
-                        {
-                            Program.BlackList.Add(p.ProcessName);
-                        }
-                    }
+                    i.CacheIcon();
 
                     Invoke(new MethodInvoker(() =>
                     {
@@ -449,8 +441,6 @@ namespace ProcessInfo
                         statusLabel.Text = "updating... " + processNum + "/" + processes.Length;
                     }));
                 }
-
-                Program.SaveBlackList();
 
                 Invoke(new MethodInvoker(() =>
                 {
@@ -1032,12 +1022,8 @@ namespace ProcessInfo
         {
             try
             {
-                if (Program.BlackListEnabled && Program.BlackList.Contains(p.ProcessName))
-                {
-                    icon = global::ProcessInfo.Properties.Resources.error.ToBitmap();
-                    return true;
-                }
-                icon = new Icon(Icon.ExtractAssociatedIcon(FileName), 16, 16).ToBitmap();
+                icon = new Icon(Icon.ExtractAssociatedIcon(FileName.ToLower()), 16, 16).ToBitmap();
+
                 return true;
             }
             catch

@@ -31,9 +31,6 @@ namespace ProcessInfo
             }
         }
 
-        public static List<string> BlackList = new List<string>();
-        public static bool BlackListEnabled = true;
-
         public static Keys KillKey = Keys.Delete;
         public static Keys UpdateKey = Keys.F5;
         public static UpdateBehaviour UpdateAction = UpdateBehaviour.Ask;
@@ -58,7 +55,6 @@ namespace ProcessInfo
         public static string generalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "kd3n1z-general");
         public static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ProcessInfo");
         public static string settingsPath = Path.Combine(path, "settings.txt");
-        public static string blacklistPath = Path.Combine(path, "blacklist.txt");
 
         public static int latest = -1;
 
@@ -88,20 +84,6 @@ namespace ProcessInfo
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
-            }
-            if (File.Exists(blacklistPath))
-            {
-                foreach(string line in File.ReadAllText(blacklistPath).Replace("\r", "").Split('\n'))
-                {
-                    if (line.Trim() == "disable")
-                    {
-                        BlackListEnabled = false;
-                    }
-                    else if (!line.TrimStart().StartsWith("#") && !string.IsNullOrWhiteSpace(line))
-                    {
-                        BlackList.Add(line);
-                    }
-                }
             }
 
             Load();
@@ -236,20 +218,6 @@ namespace ProcessInfo
                 AutoUpdateRate = int.Parse(settingsFile["autoUpdateRate"]);
             }
             catch { }
-        }
-
-        public static void SaveBlackList()
-        {
-            if (BlackListEnabled)
-            {
-                string str = "#disable\n# These processes will not be cached. Remove the \"#\" on first line to disable blacklist\n# ";
-                foreach (string pn in BlackList)
-                {
-                    str += "\n" + pn;
-                }
-
-                File.WriteAllText(blacklistPath, str);
-            }
         }
     }
 }
