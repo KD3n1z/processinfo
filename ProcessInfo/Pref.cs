@@ -122,7 +122,7 @@ namespace ProcessInfo
         {
             if (Program.latest > Program.build)
             {
-                button4.Text = "Update (github=b" + Program.latest + "; local=b" + Program.build + ")";
+                button4.Text = "Update (github=v" + Program.latest + "; local=v" + Program.build + ")";
             }
         }
 
@@ -243,7 +243,7 @@ namespace ProcessInfo
 
             if (Program.latest <= Program.build)
             {
-                button4.Text = "Updates not found (github=b" + Program.latest + "; local=b" + Program.build + ")";
+                button4.Text = "Updates not found (github=v" + Program.latest + "; local=v" + Program.build + ")";
             }
             else if (Program.latest > Program.build)
             {

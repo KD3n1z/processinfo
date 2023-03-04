@@ -159,7 +159,7 @@ namespace ProcessInfo
             try
             {
                 latestRelease = ParseJsonFromUrl("https://api.github.com/repos/KD3n1z/processinfo/releases/latest");
-                return int.Parse(latestRelease.XPathSelectElement("/name").Value.ToLower().Replace("build ", ""));
+                return int.Parse(latestRelease.XPathSelectElement("/tag_name").Value.ToLower().Replace("build", "").Replace("b", "").Replace("v", ""));
             }
             catch
             {
